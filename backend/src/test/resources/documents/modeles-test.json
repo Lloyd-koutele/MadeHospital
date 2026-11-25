@@ -1,0 +1,199 @@
+[
+  {
+    "cle": "ordonnance",
+    "nom": "Ordonnance",
+    "description": "Médicaments, dosage, posologie et durée.",
+    "type": "ORDONNANCE",
+    "structure": {
+      "sections": [
+        {
+          "titre": "Patient",
+          "blocs": [
+            {
+              "type": "AUTO",
+              "source": "patient.nom",
+              "libelle": "Patient"
+            },
+            {
+              "type": "AUTO",
+              "source": "patient.naissance",
+              "libelle": "Né(e) le"
+            }
+          ]
+        },
+        {
+          "titre": "Prescription",
+          "blocs": [
+            {
+              "type": "CHAMP",
+              "cle": "lignes",
+              "libelle": "Médicaments",
+              "champ": "TABLEAU",
+              "obligatoire": true,
+              "colonnes": [
+                {
+                  "cle": "medicament",
+                  "libelle": "Médicament"
+                },
+                {
+                  "cle": "dosage",
+                  "libelle": "Dosage"
+                },
+                {
+                  "cle": "posologie",
+                  "libelle": "Posologie"
+                },
+                {
+                  "cle": "duree",
+                  "libelle": "Durée"
+                }
+              ]
+            },
+            {
+              "type": "CHAMP",
+              "cle": "instructions",
+              "libelle": "Instructions",
+              "champ": "TEXTE_LONG",
+              "phrases": [
+                "À prendre au cours des repas.",
+                "Reconsulter si les symptômes persistent au-delà de 48 h."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "cle": "compte_rendu_hospitalisation",
+    "nom": "Compte rendu d'hospitalisation",
+    "description": "Séjour, évolution, diagnostics, traitement de sortie et suivi.",
+    "type": "COMPTE_RENDU_HOSPITALISATION",
+    "structure": {
+      "sections": [
+        {
+          "titre": "Séjour",
+          "blocs": [
+            {
+              "type": "AUTO",
+              "source": "patient.nom",
+              "libelle": "Patient"
+            },
+            {
+              "type": "AUTO",
+              "source": "patient.naissance",
+              "libelle": "Né(e) le"
+            },
+            {
+              "type": "AUTO",
+              "source": "sejour.numero",
+              "libelle": "Séjour"
+            },
+            {
+              "type": "AUTO",
+              "source": "sejour.entree",
+              "libelle": "Entrée"
+            },
+            {
+              "type": "AUTO",
+              "source": "sejour.sortie",
+              "libelle": "Sortie"
+            },
+            {
+              "type": "AUTO",
+              "source": "sejour.lit",
+              "libelle": "Lit"
+            }
+          ]
+        },
+        {
+          "titre": "Motif d'admission",
+          "blocs": [
+            {
+              "type": "CHAMP",
+              "cle": "motif",
+              "libelle": "Motif d'admission",
+              "champ": "TEXTE_LONG",
+              "obligatoire": true
+            }
+          ]
+        },
+        {
+          "titre": "Antécédents",
+          "blocs": [
+            {
+              "type": "CHAMP",
+              "cle": "antecedents",
+              "libelle": "Antécédents",
+              "champ": "TEXTE_LONG"
+            }
+          ]
+        },
+        {
+          "titre": "Évolution",
+          "blocs": [
+            {
+              "type": "CHAMP",
+              "cle": "evolution",
+              "libelle": "Évolution pendant le séjour",
+              "champ": "TEXTE_LONG",
+              "obligatoire": true
+            }
+          ]
+        },
+        {
+          "titre": "Diagnostics",
+          "blocs": [
+            {
+              "type": "CHAMP",
+              "cle": "diagnostic_principal",
+              "libelle": "Diagnostic principal",
+              "champ": "TEXTE_COURT",
+              "obligatoire": true
+            },
+            {
+              "type": "CHAMP",
+              "cle": "diagnostics_associes",
+              "libelle": "Diagnostics associés",
+              "champ": "TEXTE_LONG"
+            }
+          ]
+        },
+        {
+          "titre": "Sortie",
+          "blocs": [
+            {
+              "type": "CHAMP",
+              "cle": "mode_sortie",
+              "libelle": "Mode de sortie",
+              "champ": "CHOIX",
+              "options": [
+                "Retour à domicile",
+                "Transfert",
+                "Sortie contre avis médical",
+                "Décès"
+              ]
+            },
+            {
+              "type": "CHAMP",
+              "cle": "ordonnance",
+              "libelle": "Ordonnance de sortie",
+              "champ": "DOCUMENT_LIE",
+              "typeLie": "ORDONNANCE"
+            },
+            {
+              "type": "CHAMP",
+              "cle": "suivi",
+              "libelle": "Suivi",
+              "champ": "TEXTE_LONG",
+              "phrases": [
+                "Consultation de contrôle à 15 jours.",
+                "Contrôle biologique dans une semaine."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

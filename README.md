@@ -1,297 +1,291 @@
-# Système de Gestion Hospitalière
+# MadeHospital — Système de Gestion Hospitalière
 
-Ce projet est une application complète de gestion hospitalière qui permet aux médecins, patients, chercheurs et administrateurs de gérer efficacement les dossiers médicaux, consultations, rendez-vous et plus encore.
+Application de gestion hospitalière pour les administrateurs, les médecins (dont les chefs de service), les
+patients et les chercheurs : dossiers médicaux, consultations, documents médicaux signés, hospitalisations,
+imagerie, rendez-vous, notifications et journal d'audit.
 
 ## Table des matières
-- [Présentation](#présentation)
 - [Architecture](#architecture)
 - [Fonctionnalités](#fonctionnalités)
 - [Technologies utilisées](#technologies-utilisées)
-- [Installation](#installation)
-- [Configuration](#configuration)
+- [Lancement avec Docker](#lancement-avec-docker-recommandé)
+- [Journal d'audit](#journal-daudit)
+- [Développement sans Docker](#développement-sans-docker)
 - [Guide d'utilisation](#guide-dutilisation)
 - [Structure du projet](#structure-du-projet)
 - [API REST](#api-rest)
 - [Résolution de problèmes courants](#résolution-de-problèmes-courants)
 
-## Présentation
-
-Le Système de Gestion Hospitalière est une solution complète développée pour faciliter la gestion quotidienne des activités hospitalières. Ce système permet de gérer les dossiers médicaux des patients, les consultations, les prescriptions, les analyses médicales, et l'imagerie médicale. Il permet également de planifier les rendez-vous et offre des interfaces spécifiques pour différents types d'utilisateurs (médecins, patients, administrateurs, chercheurs).
-
 ## Architecture
 
-L'application suit une architecture client-serveur moderne :
-- **Backend** : API REST développée avec Java Spring Boot
-- **Frontend** : Application web réactive construite avec React
-- **Base de données** : Stockage relationnel pour les données médicales
-- **Stockage de fichiers** : Système de gestion pour les images médicales (DICOM et formats standards)
+Le dépôt contient deux applications indépendantes, chacune découpée en **modules par domaine métier**
+(et non en couches techniques MVC), avec les mêmes noms de modules des deux côtés. Côté frontend, un module
+s'importe uniquement par son `index.ts` (règle eslint `no-restricted-imports`).
+
+| Module (backend / frontend) | Rôle |
+|---|---|
+| `commun` / `shared` | Réponses API, gestion des erreurs, configuration ; client HTTP, composants UI et utilitaires partagés |
+| `securite` / `auth` | JWT, Spring Security, connexion |
+| `utilisateur` | Comptes, rôles, administrateurs, chercheurs |
+| `etablissement` | Identité de l'établissement (nom, coordonnées, logo) reprise sur les documents |
+| `servicehospitalier` / `service-hospitalier` | Services de l'hôpital, médecins rattachés et chef de service |
+| `medecin` | Médecins et leur tableau de bord |
+| `patient` | Patients et leur espace personnel |
+| `dossiermedical` / `dossier-medical` | Dossier médical, consultations, ordonnances, analyses |
+| `document` | Modèles de documents, documents médicaux signés (PDF, QR code de vérification), séjours |
+| `imagerie` | Images médicales (standard et DICOM via Orthanc) |
+| `rendezvous` / `rendez-vous` | Rendez-vous |
+| `autorisation` | Autorisations d'accès aux dossiers patients |
+| `notification` | Notifications internes (sans aucune donnée médicale) |
+| `audit` | Journal d'audit chaîné et signé |
+
+En production, tout passe par **Traefik** (image maison, HTTPS) sur un seul domaine :
+`/api` va au backend, le reste au frontend, et `orthanc.<domaine>` à l'interface d'Orthanc.
 
 ## Fonctionnalités
 
-### Gestion des utilisateurs
-- Authentification et autorisation par rôles (admin, médecin, patient, chercheur)
-- Gestion des profils utilisateurs
-- Création et modification des comptes
+### Administration
+- Création des comptes médecins, chercheurs et administrateurs ; activation et désactivation
+- Services hospitaliers : création, rattachement des médecins, désignation du chef de service
+- Identité de l'établissement et logo, repris dans l'en-tête des documents
+- Consultation et vérification du journal d'audit
 
-### Gestion des patients
-- Création et modification des dossiers patients
-- Recherche et filtrage des patients
-- Visualisation des informations personnelles et médicales
+### Dossier médical (médecin)
+- Création des patients et de leur dossier ; accès limité aux médecins autorisés
+- Informations générales (biométrie, IMC, groupe sanguin, allergies, contexte médical)
+- Consultations avec ordonnances, analyses et imagerie (DICOM et images standard)
+- Hospitalisations : admission dans un service et sortie
 
-### Dossier médical
-- Gestion complète du dossier médical du patient
-- Consultations médicales avec détails
-- Suivi historique des consultations
+### Documents médicaux
+- **Modèles par service** : le chef de service crée et modifie les modèles de son service. Un enregistrement
+  les rend immédiatement disponibles aux médecins du service, en créant une nouvelle version utilisée par les
+  documents suivants. Il peut archiver ou supprimer un modèle (suppression seulement s'il n'a servi à aucun document).
+- Un modèle est composé de sections contenant du texte fixe, des données remplies automatiquement
+  (identité du patient, médecin, service…), des champs à saisir et des **zones de texte libre** sans titre
+  (utiles pour une ordonnance, par exemple).
+- Les médecins peuvent demander un nouveau modèle à leur chef de service ; le modèle intégré
+  « Document libre » permet de rédiger sans modèle.
+- **Rédaction** : le médecin remplit le document, l'enregistre (validation et signature en une étape) ou
+  le rectifie ensuite. Le PDF porte un numéro unique et un QR code vérifiable publiquement.
 
-### Consultations médicales
-- Création et gestion des consultations
-- Ajout d'analyses médicales
-- Prescription d'ordonnances
-- Gestion des images médicales (radiographies, échographies, IRM, etc.)
+### Espace patient (lecture seule)
+- Tableau de bord : constantes, IMC, prochains rendez-vous, consultations récentes, accès accordés
+- **Mon dossier** : même présentation que chez le médecin, sans modification possible, avec les onglets
+  Informations générales, Consultations (compte rendu, ordonnances, analyses, imagerie), Documents (PDF)
+  et Hospitalisation
+- **Mes rendez-vous** : prochain rendez-vous, rendez-vous à venir (annulables) et historique
+- **Gestion des accès** : liste des médecins autorisés et retrait d'un accès
 
-### Imagerie médicale
-- Téléchargement et visualisation d'images médicales
-- Support pour les formats DICOM et standards (JPG, PNG)
-- Visionneuse spécialisée pour les images médicales
+### Rendez-vous
+- Planification par le médecin ; confirmation, report, annulation, fin de consultation, absence
+- Le patient consulte ses rendez-vous et peut annuler un rendez-vous à venir ; l'autre partie est notifiée
 
-### Gestion des rendez-vous
-- Planification des rendez-vous
-- Vérification des disponibilités
-- Notifications et rappels
-- Possibilité de reporter ou annuler
-
-### Tableaux de bord spécifiques
-- Tableau de bord pour les médecins
-- Tableau de bord pour les patients
-- Interface d'administration
-
-### Gestion des accès
-- Partage sécurisé des dossiers médicaux
-- Gestion des autorisations pour les patients
-- Contrôle d'accès granulaire
+### Notifications
+- Cloche de notifications pour chaque utilisateur (rendez-vous, documents disponibles, modèles publiés…)
+- Les notifications ne contiennent jamais de donnée médicale : elles renvoient vers la page concernée
 
 ## Technologies utilisées
 
-### Backend
-- Java 11+
-- Spring Boot
-- Spring Security
-- Spring Data JPA
-- Hibernate
-- Gradle
+- **Backend** : Java 17, Spring Boot 3, Spring Security (JWT), Spring Data JPA, Gradle,
+  OpenHTMLtoPDF (documents PDF), ZXing (QR codes)
+- **Frontend** : React 18, TypeScript, Vite, React Router, React Bootstrap, React Icons, Axios, Cornerstone (DICOM)
+- **Données** : PostgreSQL 16, Orthanc (serveur DICOM)
+- **Infrastructure** : Docker Compose, Traefik v3 (HTTPS), Nginx
 
-### Frontend
-- React
-- React Router
-- React Bootstrap
-- Axios
-- Vite (build tool)
+## Lancement avec Docker (recommandé)
 
-### Autres
-- JWT pour l'authentification
-- Base de données (PostgreSQL)
-- Système de stockage de fichiers pour les images médicales
+Prérequis : Docker, et [mkcert](https://github.com/FiloSottile/mkcert) pour un HTTPS de confiance en local.
 
-## Installation
-
-### Prérequis
-- JDK 17 ou supérieur
-- Node.js 14 ou supérieur
-- npm
-- Base de données PostgreSQL
-
-### Étapes d'installation
-
-#### Backend (Spring Boot)
-1. Cloner le dépôt
+1. Créer le fichier `.env` à partir du modèle et remplacer les valeurs
+   (dont `INITIAL_ADMIN_*`, le premier administrateur créé au démarrage, et `APP_URL_PUBLIQUE`,
+   l'adresse imprimée dans le QR code des documents) :
    ```bash
-   git clone https://github.com/votre-organisation/gestion_hopital.git
-   cd gestion_hopital
+   cp .env.example .env
+   ```
+2. Déclarer le domaine dans le fichier hosts de la machine (une seule fois) :
+   ```bash
+   echo "127.0.0.1       madehospital.sn orthanc.madehospital.sn" | sudo tee -a /etc/hosts
+   ```
+3. Générer le certificat local (une seule fois `mkcert -install` sur la machine) :
+   ```bash
+   ./scripts/generer-certificats.sh
+   ```
+4. Construire et lancer la pile (Traefik écoute sur les ports 80 et 443, qui doivent être libres) :
+   ```bash
+   docker compose up -d --build
    ```
 
-2. Configurer la base de données dans `src/main/resources/application.properties`
-
-3. Lancer l'application avec Gradle
-   ```bash
-   ./gradlew bootRun
-   ```
-   
-   Le serveur démarrera sur http://localhost:8080
-
-#### Frontend (React)
-1. Naviguer vers le répertoire frontend
-   ```bash
-   cd hospital_frontend
-   ```
-
-2. Installer les dépendances
-   ```bash
-   npm install
-   ```
-
-3. Lancer l'application en développement
-   ```bash
-   npm run dev
-   ```
-   
-   L'application sera accessible sur http://localhost:5173
-
-## Configuration
-
-### Configuration du Backend
-Le fichier `src/main/resources/application.properties` contient les configurations principales :
-
-```properties
-# Configuration de la base de données
-spring.datasource.url=jdbc:mysql://localhost:3306/hopital_db
-spring.datasource.username=root
-spring.datasource.password=your_password
-
-# JPA/Hibernate
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-
-# Configuration de sécurité
-jwt.secret=your_jwt_secret_key
-jwt.expiration=86400000
-
-# Configuration du stockage d'images médicales
-storage.location=./medical-images
+Après une modification du code, reconstruire seulement ce qui a changé :
+```bash
+docker compose up -d --build backend frontend
 ```
 
-### Configuration du Frontend
-Les variables d'environnement peuvent être configurées dans le fichier `.env` à la racine du dossier frontend :
+| Adresse | Service |
+|---|---|
+| https://madehospital.sn | Application |
+| https://madehospital.sn/swagger-ui.html | Documentation de l'API |
+| https://orthanc.madehospital.sn | Interface Orthanc (identifiants `ORTHANC_*` du `.env`) |
+| port 4242 (machine locale uniquement) | Réception DICOM d'Orthanc |
 
+Volumes Docker : `postgres_data` (base), `orthanc_data` (DICOM), `images_medicales` (images standard)
+et `audit_cles` (clé de signature du journal d'audit).
+
+## Journal d'audit
+
+Les actions sensibles sont inscrites automatiquement dans un journal **chaîné et signé**, visible uniquement
+par les administrateurs (onglet « Journal d'audit ») : connexions, comptes, services, accès aux dossiers
+(lectures comprises), consultations, ordonnances, analyses, imagerie, documents, autorisations, rendez-vous
+et refus d'accès.
+
+- Chaque entrée contient l'empreinte SHA-256 de la précédente et sa propre empreinte signée en Ed25519 :
+  une modification, une suppression ou une insertion est détectée par la vérification
+  (`GET /api/admin/audit/verification`, également exécutée chaque nuit).
+- La table `journal_audit` est en ajout seul : PostgreSQL refuse tout `UPDATE` et `DELETE`.
+- La clé de signature est générée au premier démarrage dans le volume Docker `audit_cles`.
+  **Sauvegardez ce volume** ; la clé publique est disponible sur `GET /api/admin/audit/cle-publique`.
+
+## Développement sans Docker
+
+```bash
+cd backend && ./gradlew bootRun        # API sur http://localhost:8080
+cd frontend && npm install && npm run dev   # client sur http://localhost:5173
 ```
-VITE_API_BASE_URL=http://localhost:8080
+
+Le backend lit ses paramètres dans les variables d'environnement, ou dans un fichier `.env` placé dans
+`backend/` ou à la racine (même format que `.env.example`, avec en plus `DB_URL`, `DB_USERNAME`,
+`DB_PASSWORD` si la base n'est pas celle par défaut). Vite relaie `/api` vers `BACKEND_URL`
+(`http://localhost:8080` par défaut).
+
+Vérifications :
+```bash
+cd backend && ./gradlew test
+cd frontend && npm run typecheck && npm run lint && npm run build
 ```
+
+Les tests backend utilisent une base H2 en mémoire (profil de test).
 
 ## Guide d'utilisation
 
-### Connexion au système
-1. Accédez à l'URL de l'application (http://localhost:5173 en développement)
-2. Connectez-vous avec vos identifiants selon votre rôle :
-   - Administrateur : gestion des utilisateurs et paramètres
-   - Médecin : gestion des patients et consultations
-   - Patient : accès à son dossier médical et rendez-vous
-   - Chercheur : accès aux données anonymisées
-
-### Fonctionnalités par rôle
-
-#### Médecin
-- Accéder à la liste des patients
-- Consulter et modifier les dossiers médicaux
-- Créer des consultations
-- Ajouter des analyses, ordonnances et images médicales
-- Gérer les rendez-vous
-
-#### Patient
-- Consulter son dossier médical
-- Voir ses consultations et ordonnances
-- Gérer ses rendez-vous
-- Contrôler les accès à son dossier médical
+Accédez à https://madehospital.sn (ou http://localhost:5173 en développement) et connectez-vous.
+Le premier administrateur est celui défini par `INITIAL_ADMIN_*` ; il crée ensuite les autres comptes et
+les services.
 
 #### Administrateur
-- Gérer les comptes utilisateurs
-- Configurer les paramètres système
-- Superviser les activités
+- Créer les comptes médecins, chercheurs et administrateurs
+- Créer les services, y rattacher les médecins et désigner les chefs de service
+- Renseigner l'identité et le logo de l'établissement
+- Consulter et vérifier le journal d'audit
+
+#### Médecin
+- Créer des patients et consulter les dossiers auxquels il a accès
+- Saisir consultations, ordonnances, analyses et images médicales
+- Rédiger et signer des documents à partir des modèles de son service
+- Admettre un patient en hospitalisation et enregistrer sa sortie
+- Planifier et suivre les rendez-vous
+
+#### Chef de service
+- Tout ce que fait un médecin
+- Créer, modifier, archiver et supprimer les modèles de documents du service
+- Traiter les demandes de modèles des médecins du service
+
+#### Patient
+- Consulter son dossier médical en lecture seule (consultations, documents PDF, hospitalisations)
+- Voir ses rendez-vous et annuler un rendez-vous à venir
+- Gérer les médecins autorisés à accéder à son dossier
 
 ## Structure du projet
 
-### Backend (Java Spring Boot)
-
 ```
-src/main/java/sn/hopital/gestion_hopital/
-├── config/            # Configuration Spring
-├── controller/        # Contrôleurs REST
-├── dto/               # Objets de transfert de données
-├── entite/            # Entités JPA
-├── exception/         # Gestion des exceptions
-├── repository/        # Repositories Spring Data
-├── security/          # Configuration de sécurité
-├── service/           # Services métier
-└── util/              # Classes utilitaires
-```
-
-### Frontend (React)
-
-```
-hospital_frontend/
-├── public/            # Ressources statiques
-├── src/
-│   ├── assets/        # Images, icônes, etc.
-│   ├── auth/          # Authentification
-│   ├── components/    # Composants React
-│   │   ├── common/    # Composants partagés
-│   │   ├── DossierMedical/    # Composants du dossier médical
-│   │   ├── Patient/           # Gestion des patients
-│   │   ├── PatientDashboard/  # Tableau de bord patient
-│   │   └── RendezVous/        # Gestion des rendez-vous
-│   ├── hooks/         # Hooks personnalisés
-│   ├── pages/         # Pages principales
-│   ├── services/      # Services API
-│   ├── styles/        # Styles CSS
-│   └── utils/         # Fonctions utilitaires
+MadeHospital/
+├── backend/                       Spring Boot — package made.hospital
+│   └── src/main/java/made/hospital/
+│       ├── MadeHospitalApplication.java
+│       └── <module>/              audit, autorisation, commun, document, dossiermedical,
+│           ├── api/                 etablissement, imagerie, medecin, notification, patient,
+│           │   └── dto/             rendezvous, securite, servicehospitalier, utilisateur
+│           ├── application/       services (cas d'usage)
+│           ├── domaine/           entités JPA
+│           └── infra/             repositories, stockage, tâches planifiées
+├── frontend/                      React + TypeScript
+│   └── src/
+│       ├── app/                   point d'entrée, routeur, barre de navigation
+│       ├── shared/                client HTTP, composants UI, utilitaires
+│       ├── types/                 déclarations globales
+│       └── modules/<module>/      audit, auth, autorisation, document, dossier-medical,
+│           └── index.ts             etablissement, imagerie, medecin, notification, patient,
+│                                    rendez-vous, service-hospitalier, utilisateur
+├── traefik/                       image Traefik maison (routage + HTTPS)
+├── scripts/                       génération des certificats locaux
+├── docker-compose.yml
+└── .env.example
 ```
 
 ## API REST
 
-L'API REST est organisée selon les ressources principales suivantes :
+La documentation complète et à jour est disponible sur `/swagger-ui.html`. Principales ressources :
 
 ### Authentification
-- `POST /api/auth/login` - Authentification
-- `POST /api/auth/register` - Inscription (si applicable)
+- `POST /api/login` — connexion (renvoie le jeton JWT)
+- `GET /api/moi` — utilisateur connecté
+- `POST /api/logout` — déconnexion
 
-### Patients
-- `GET /api/medecin/patients` - Liste des patients
-- `GET /api/medecin/patients/{id}` - Détails d'un patient
-- `POST /api/medecin/patients` - Création d'un patient
+### Administration
+- `GET|POST /api/admin/medecins`, `/api/admin/chercheurs`, `/api/admin/admins` — comptes
+- `GET /api/admin/users`, `PUT /api/admin/users/status` — utilisateurs et activation
+- `GET|POST /api/admin/services`, `PUT /api/admin/services/{id}/medecins`, `PUT /api/admin/services/{id}/chef` — services
+- `PUT /api/admin/etablissement` — identité de l'établissement (`GET /api/etablissement` en lecture)
+- `GET /api/admin/audit`, `/api/admin/audit/verification`, `/api/admin/audit/export` — journal d'audit
 
-### Dossier médical
-- `GET /api/medecin/patients/{id}/dossier-medical/consultations` - Liste des consultations
-- `POST /api/medecin/patients/{id}/dossier-medical/consultations` - Ajout d'une consultation
-- `GET /api/medecin/patients/{id}/dossier-medical/consultations/{consultationId}` - Détails d'une consultation
+### Médecin : patients et dossier médical
+- `GET /api/medecin/patients`, `POST /api/medecin/create-patient`
+- `GET|PUT /api/medecin/patients/{patientId}/dossier-medical`
+- `GET|POST /api/medecin/patients/{patientId}/dossier-medical/consultations`
+- `.../consultations/{consultationId}/ordonnances`, `/analyses`, `/images` — lecture et ajout
 
-### Analyses
-- `GET /api/medecin/patients/{id}/dossier-medical/consultations/{consultationId}/analyses` - Liste des analyses
-- `POST /api/medecin/patients/{id}/dossier-medical/consultations/{consultationId}/analyses` - Ajout d'une analyse
+### Documents et hospitalisations
+- `GET /api/medecin/modeles` — modèles disponibles pour le médecin
+- `GET|POST /api/medecin/chef/modeles`, `PUT|DELETE /api/medecin/chef/modeles/{id}` — modèles du service (chef)
+- `GET|POST /api/medecin/patients/{patientId}/documents` — documents d'un patient
+- `POST /api/medecin/documents/{id}/valider`, `/rectifier` ; `GET /api/medecin/documents/{id}/pdf`
+- `GET|POST /api/medecin/patients/{patientId}/sejours`, `POST /api/medecin/sejours/{id}/sortie`
+- `GET /api/documents/verifier/{numero}` — vérification publique d'un document (QR code)
 
-### Ordonnances
-- `GET /api/medecin/patients/{id}/dossier-medical/consultations/{consultationId}/ordonnances` - Liste des ordonnances
-- `POST /api/medecin/patients/{id}/dossier-medical/consultations/{consultationId}/ordonnances` - Ajout d'une ordonnance
-
-### Images médicales
-- `GET /api/medecin/patients/{id}/dossier-medical/consultations/{consultationId}/images` - Liste des images
-- `POST /api/medecin/patients/{id}/dossier-medical/consultations/{consultationId}/images` - Ajout d'une image
-- `GET /api/medecin/patients/{id}/dossier-medical/consultations/{consultationId}/images/{imageId}/file` - Téléchargement d'une image
+### Patient
+- `GET /api/patient` — identité du patient connecté
+- `GET /api/patient/mon-dossier-medical`, `/api/patient/mes-consultations`
+- `GET /api/patient/mes-documents`, `/api/patient/mes-documents/{id}/pdf`, `/api/patient/mes-sejours`
+- `GET /api/patient/mes-acces`
 
 ### Rendez-vous
-- `GET /api/rendez-vous` - Liste des rendez-vous
-- `POST /api/rendez-vous` - Création d'un rendez-vous
-- `PUT /api/rendez-vous/{id}` - Mise à jour d'un rendez-vous
-- `DELETE /api/rendez-vous/{id}` - Annulation d'un rendez-vous
+- `GET|POST /api/rendez-vous` — rendez-vous du médecin (`/a-venir`, `/aujourd-hui`)
+- `GET /api/rendez-vous/mes-rendez-vous` — rendez-vous du patient connecté
+- `POST /api/rendez-vous/{id}/confirmer`, `/reporter`, `/annuler`, `/terminer`, `/absence`
 
-### Utilisateurs
-- `GET /api/admin/users` - Liste des utilisateurs (admin)
-- `POST /api/admin/users` - Création d'un utilisateur (admin)
-- `PUT /api/admin/users/{id}` - Mise à jour d'un utilisateur (admin)
+### Autorisations et notifications
+- `POST /api/autorisations/patients/{patientId}/accorder`, `DELETE /api/autorisations/acces/{autorisationId}`
+- `GET /api/notifications`, `GET /api/notifications/compteur`, `PATCH /api/notifications/{id}/lue`, `POST /api/notifications/tout-lire`
 
 ## Résolution de problèmes courants
 
-### Problème: Les analyses/ordonnances s'affichent dans une autre consultation
-- **Solution**: Vérifiez que l'ID de consultation est correctement passé lors de la création d'analyses ou d'ordonnances.
+### Le site ne s'ouvre pas sur https://madehospital.sn
+- Vérifiez la ligne du fichier `/etc/hosts` et que les ports 80 et 443 ne sont pas pris par un autre
+  conteneur ou service (`docker ps`).
+- Si le navigateur signale un certificat non fiable, relancez `mkcert -install` puis `./scripts/generer-certificats.sh`.
 
-### Problème: Erreur lors du chargement des images DICOM
-- **Solution**: Assurez-vous que les bibliothèques de traitement DICOM sont correctement installées et configurées.
+### La page affiche une ancienne version après un redéploiement
+- Rechargez sans cache (Cmd + Maj + R / Ctrl + Maj + R).
 
-### Problème: Échec d'authentification
-- **Solution**: Vérifiez la validité du token JWT et la configuration de sécurité dans le backend.
+### Un chef de service ne peut pas gérer les modèles
+- Vérifiez dans l'administration qu'il est bien désigné chef du service concerné.
 
-### Problème: Erreur "404 Not Found" pour les API
-- **Solution**: Vérifiez les URLs des endpoints et assurez-vous que le serveur backend est en cours d'exécution.
+### Erreur lors du chargement des images DICOM
+- Vérifiez que le conteneur `madehospital-orthanc` fonctionne et que les identifiants `ORTHANC_*` du `.env`
+  sont ceux utilisés par le backend.
+
+### Échec d'authentification
+- Le jeton JWT a pu expirer : reconnectez-vous. Après un changement de `JWT_SECRET`, tous les jetons existants
+  sont invalides.
 
 ---
 
----
-
-© 2025 Système de Gestion Hospitalière. Tous droits réservés.
+© 2025 MadeHospital. Tous droits réservés.

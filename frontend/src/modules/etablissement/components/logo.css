@@ -1,0 +1,33 @@
+/* Symbole de l'hôpital. Couleurs : variables du thème. */
+
+.logo-hopital {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.logo-hopital img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.logo-hopital.forme-ronde {
+  border-radius: 50%;
+}
+
+.logo-hopital.forme-carree {
+  border-radius: 8px;
+}
+
+.logo-hopital.forme-rectangle {
+  border-radius: 6px;
+}
+
+.logo-hopital.sombre {
+  background: var(--color-surface);
+  padding: 2px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2);
+}

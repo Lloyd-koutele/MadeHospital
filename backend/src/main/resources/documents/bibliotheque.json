@@ -1,0 +1,24 @@
+[
+  {
+    "cle": "document_libre",
+    "nom": "Document libre",
+    "description": "Quand aucun modèle ne convient : vous nommez et rédigez vos propres sections.",
+    "type": "DOCUMENT_LIBRE",
+    "structure": {
+      "libre": true,
+      "sections": [
+        {
+          "titre": "Observation",
+          "blocs": [
+            {
+              "type": "CHAMP",
+              "cle": "section_1",
+              "libelle": "Observation",
+              "champ": "TEXTE_LONG"
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

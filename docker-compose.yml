@@ -1,0 +1,121 @@
+# Pile complète MadeHospital :
+#   traefik  : point d'entrée HTTPS unique (image maison, voir traefik/)
+#   frontend : client React servi par Nginx
+#   backend  : serveur Spring Boot (API REST)
+#   postgres : base de données
+#   orthanc  : serveur DICOM (images médicales)
+# Lancement : docker compose up -d --build   (après avoir rempli .env et généré les certificats)
+name: madehospital
+
+services:
+  traefik:
+    build: ./traefik
+    image: madehospital-traefik:latest
+    container_name: madehospital-traefik
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      APP_DOMAIN: ${APP_DOMAIN}
+    volumes:
+      - ./traefik/certs:/etc/traefik/certs:ro
+    command:
+      - "--providers.file.directory=/etc/traefik/dynamic"
+      - "--providers.file.watch=true"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+      - "--ping=true"
+      - "--log.level=INFO"
+    healthcheck:
+      test: ["CMD", "traefik", "healthcheck", "--ping"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      - frontend
+      - backend
+
+  frontend:
+    build: ./frontend
+    image: madehospital-frontend:latest
+    container_name: madehospital-frontend
+    restart: unless-stopped
+
+  backend:
+    build: ./backend
+    image: madehospital-backend:latest
+    container_name: madehospital-backend
+    restart: unless-stopped
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB}
+      DB_USERNAME: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      ORTHANC_URL: http://orthanc:8042
+      ORTHANC_USERNAME: ${ORTHANC_USERNAME}
+      ORTHANC_PASSWORD: ${ORTHANC_PASSWORD}
+      APP_CORS_ORIGINS: https://${APP_DOMAIN}
+      APP_URL_PUBLIQUE: https://${APP_DOMAIN}
+      STORAGE_BASE_PATH: /app/medical-images
+      AUDIT_CLES_DIR: /app/audit-cles
+      INITIAL_ADMIN_EMAIL: ${INITIAL_ADMIN_EMAIL:-}
+      INITIAL_ADMIN_PASSWORD: ${INITIAL_ADMIN_PASSWORD:-}
+      INITIAL_ADMIN_NOM: ${INITIAL_ADMIN_NOM:-Administrateur}
+      INITIAL_ADMIN_PRENOM: ${INITIAL_ADMIN_PRENOM:-Principal}
+      INITIAL_ADMIN_TELEPHONE: ${INITIAL_ADMIN_TELEPHONE:-}
+      INITIAL_ADMIN_DEPARTEMENT: ${INITIAL_ADMIN_DEPARTEMENT:-Direction}
+    volumes:
+      - images_medicales:/app/medical-images
+      # Clé de signature du journal d'audit : hors base, à sauvegarder
+      - audit_cles:/app/audit-cles
+    depends_on:
+      postgres:
+        condition: service_healthy
+      orthanc:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: madehospital-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  orthanc:
+    image: orthancteam/orthanc:25.1.1
+    container_name: madehospital-orthanc
+    restart: unless-stopped
+    environment:
+      ORTHANC__NAME: MadeHospital
+      ORTHANC__AUTHENTICATION_ENABLED: "true"
+      ORTHANC__REGISTERED_USERS: '{"${ORTHANC_USERNAME}": "${ORTHANC_PASSWORD}"}'
+      ORTHANC__DICOM_AET: MADEHOSPITAL
+    ports:
+      # Port DICOM (réception depuis les modalités d'imagerie), limité à la machine hôte
+      - "127.0.0.1:4242:4242"
+    volumes:
+      - orthanc_data:/var/lib/orthanc/db
+    healthcheck:
+      test: ["CMD", "bash", "-c", "echo > /dev/tcp/127.0.0.1/8042"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+volumes:
+  postgres_data:
+  orthanc_data:
+  images_medicales:
+  audit_cles:

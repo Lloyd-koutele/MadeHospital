@@ -1,0 +1,88 @@
+/* Vérification publique d'un document. Couleurs : variables du thème. */
+
+.verif-page {
+  min-height: 100vh;
+  background: var(--color-background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+.verif-carte {
+  width: 100%;
+  max-width: 520px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  padding: 24px;
+}
+
+.verif-carte header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--color-primary);
+  color: var(--color-brand);
+  font-size: 1.05rem;
+}
+
+.verif-carte h1 {
+  font-size: 1.25rem;
+  color: var(--color-brand);
+  margin: 16px 0 12px;
+}
+
+.verif-resultat {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-weight: 600;
+}
+
+.verif-resultat svg {
+  flex-shrink: 0;
+  font-size: 1.3rem;
+}
+
+.verif-resultat.ok {
+  background: var(--color-success-light);
+  color: var(--color-success-dark);
+}
+
+.verif-resultat.alerte {
+  background: var(--color-warning-light);
+  color: var(--color-warning-dark);
+}
+
+.verif-resultat.ko {
+  background: var(--color-danger-light);
+  color: var(--color-danger-dark);
+}
+
+.verif-details {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 6px 16px;
+  margin: 16px 0;
+}
+
+.verif-details dt {
+  color: var(--color-text-muted);
+  font-size: 0.86rem;
+}
+
+.verif-details dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.verif-info {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  margin: 12px 0 0;
+}

@@ -1,0 +1,496 @@
+/* Formulaire utilisateur (préfixe fu-). Couleurs : uniquement les variables du thème. */
+
+.fu {
+  display: flex;
+  flex-direction: column;
+  margin: -1.25rem; /* occupe toute la largeur de la fenêtre */
+}
+
+.fu-corps {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+}
+
+.fu-chargement {
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: 24px;
+}
+
+.fu-erreur {
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: var(--color-danger-light);
+  color: var(--color-danger-dark);
+  border: 1px solid color-mix(in srgb, var(--color-danger) 40%, transparent);
+  font-size: 0.9rem;
+}
+
+/* Étapes */
+.fu-etape + .fu-etape {
+  padding-top: 24px;
+  border-top: 1px solid var(--color-border);
+}
+
+.fu-etape-titre {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--color-text);
+}
+
+.fu-numero {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-brand);
+  color: var(--color-on-primary);
+  font-size: 0.65rem;
+}
+
+.fu-note {
+  margin-left: auto;
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--color-text-muted);
+}
+
+/* Cartes de rôle */
+.fu-roles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.fu-role {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px;
+  text-align: left;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  cursor: pointer;
+  transition: border-color 0.15s, background-color 0.15s, box-shadow 0.15s;
+}
+
+.fu-role:hover:not(:disabled) {
+  border-color: var(--color-border-strong);
+  background: var(--color-surface-alt);
+}
+
+.fu-role:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.fu-role.choisi {
+  border: 2px solid var(--color-primary);
+  padding: 13px;
+  background: var(--color-primary-light);
+  box-shadow: var(--shadow-sm);
+}
+
+.fu-role-entete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.fu-role-icone {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.fu-role-admin .fu-role-icone {
+  background: color-mix(in srgb, var(--color-brand) 8%, var(--color-surface));
+  color: var(--color-brand);
+}
+
+.fu-role-medecin .fu-role-icone {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.fu-role-chercheur .fu-role-icone {
+  background: var(--color-exam-bg);
+  color: var(--color-exam-accent);
+}
+
+.fu-role.choisi .fu-role-icone {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.fu-coche {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border-strong);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: var(--color-on-primary);
+}
+
+.fu-role.choisi .fu-coche {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.fu-role-titre {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-text);
+}
+
+.fu-role.choisi .fu-role-titre {
+  color: var(--color-brand);
+}
+
+.fu-role-description {
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+}
+
+/* Champs propres au rôle */
+.fu-contexte {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 12px;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-alt);
+}
+
+.fu-services {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fu-puces {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.fu-puce {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.fu-puce strong {
+  font-size: 0.72rem;
+  color: var(--color-primary);
+}
+
+.fu-puce:hover {
+  border-color: var(--color-primary);
+}
+
+.fu-puce.choisie {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.fu-puce.choisie strong {
+  color: var(--color-on-primary);
+}
+
+.fu-aide {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+/* Champs */
+.fu-grille {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.fu-champ {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+}
+
+.fu-libelle {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.fu-requis {
+  color: var(--color-danger);
+}
+
+.fu-saisie {
+  position: relative;
+  display: block;
+}
+
+.fu-saisie-icone {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.fu-saisie input,
+.fu-telephone input {
+  width: 100%;
+  padding: 9px 12px 9px 36px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.9rem;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.fu-saisie input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.15);
+}
+
+/* Remplissage automatique : pas de fond jaune */
+.fu input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 40px var(--color-surface) inset;
+  -webkit-text-fill-color: var(--color-text);
+}
+
+.fu-telephone {
+  display: flex;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--color-surface);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.fu-telephone:focus-within {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.15);
+}
+
+.fu-indicatif {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 12px;
+  background: var(--color-surface-alt);
+  border-right: 1px solid var(--color-border);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.fu-telephone input {
+  border: none;
+  padding-left: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.fu-telephone input:focus {
+  outline: none;
+}
+
+/* Mot de passe */
+.fu-saisie-mdp input {
+  padding-right: 100px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.fu-oeil {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.fu-oeil:hover {
+  background: var(--color-surface-alt);
+  color: var(--color-text);
+}
+
+.fu-jauge {
+  margin-top: 10px;
+  --fu-jauge-couleur: var(--color-border);
+}
+
+.fu-jauge.niveau-faible { --fu-jauge-couleur: var(--color-danger); }
+.fu-jauge.niveau-moyen { --fu-jauge-couleur: var(--color-warning); }
+.fu-jauge.niveau-bon { --fu-jauge-couleur: var(--color-primary); }
+.fu-jauge.niveau-fort { --fu-jauge-couleur: var(--color-success); }
+
+.fu-jauge-barres {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.fu-jauge-barres span {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--color-border);
+  transition: background-color 0.3s;
+}
+
+.fu-jauge-barres span.pleine {
+  background: var(--fu-jauge-couleur);
+}
+
+.fu-jauge-legende {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+}
+
+.fu-jauge-libelle {
+  font-weight: 600;
+  color: var(--fu-jauge-couleur);
+}
+
+.fu-jauge.niveau-vide .fu-jauge-libelle {
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+/* Pied */
+.fu-pied {
+  position: sticky;
+  bottom: -1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 24px;
+  background: var(--color-background);
+  border-top: 1px solid var(--color-border);
+}
+
+.fu-pied-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+}
+
+.fu-pied-info svg {
+  color: var(--color-primary);
+}
+
+.fu-pied-actions {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.fu-bouton-secondaire,
+.fu-bouton-principal {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.fu-bouton-secondaire {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-text);
+}
+
+.fu-bouton-secondaire:hover {
+  background: var(--color-surface-alt);
+}
+
+.fu-bouton-principal {
+  border: none;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  box-shadow: 0 2px 6px rgba(var(--color-primary-rgb), 0.25);
+}
+
+.fu-bouton-principal:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+}
+
+.fu-bouton-principal:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+@media (max-width: 640px) {
+  .fu-roles,
+  .fu-grille {
+    grid-template-columns: 1fr;
+  }
+
+  .fu-corps {
+    padding: 18px;
+  }
+}

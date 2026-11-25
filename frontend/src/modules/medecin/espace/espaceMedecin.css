@@ -1,0 +1,662 @@
+/* Espace médecin (préfixe em-). Couleurs : uniquement les variables du thème. */
+
+.em-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 36px 16px 48px;
+}
+
+.em-entete {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.em-entete h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  color: var(--color-text);
+}
+
+.em-entete p {
+  margin: 4px 0 0;
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+}
+
+.em-capitale::first-letter {
+  text-transform: uppercase;
+}
+
+/* Boutons */
+.em-bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.88rem;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background-color 0.15s;
+}
+
+.em-bouton:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.em-bouton-principal {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.em-bouton-principal:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  color: var(--color-on-primary);
+}
+
+.em-bouton:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.em-bouton-petit {
+  padding: 5px 12px;
+  font-size: 0.78rem;
+}
+
+.em-lien {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.em-lien:hover {
+  text-decoration: underline;
+}
+
+/* Vues Patients / Rendez-vous */
+.em-vues {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  margin-bottom: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-surface);
+}
+
+.em-vues button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border: none;
+  border-radius: 7px;
+  background: none;
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.em-vues button.actif {
+  background: var(--color-brand);
+  color: var(--color-on-primary);
+}
+
+.em-compteur {
+  padding: 0 7px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  background: var(--color-surface-alt);
+  color: var(--color-text-muted);
+}
+
+.em-vues button.actif .em-compteur {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--color-on-primary);
+}
+
+/* Carte principale */
+.em-carte {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.em-outils {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.em-titre-carte {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.em-recherche {
+  position: relative;
+  flex: 1 1 280px;
+  max-width: 360px;
+}
+
+.em-recherche svg {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.em-recherche input {
+  width: 100%;
+  padding: 7px 12px 7px 34px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 0.88rem;
+  color: var(--color-text);
+  background: var(--color-surface);
+}
+
+.em-recherche input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.em-filtres {
+  display: inline-flex;
+  padding: 3px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-surface-alt);
+}
+
+.em-filtres button {
+  padding: 4px 12px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: none;
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.em-filtres button.actif {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+/* Tableau des patients */
+.em-defilement {
+  overflow-x: auto;
+}
+
+.em-tableau {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.em-tableau th {
+  padding: 10px 20px;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  background: var(--color-surface-alt);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.em-tableau td {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text);
+  vertical-align: middle;
+}
+
+.em-tableau tbody tr {
+  cursor: pointer;
+  transition: background-color 0.12s;
+}
+
+.em-tableau tbody tr:hover {
+  background: var(--color-surface-alt);
+}
+
+.em-droite {
+  text-align: right !important;
+}
+
+.em-patient {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
+}
+
+.em-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+
+.em-nom {
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.em-identifiant {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.em-discret {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.em-alerte {
+  margin: 4px 0 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-danger);
+}
+
+.em-tronque {
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.em-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.em-statut {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.em-point {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.em-statut-attente {
+  color: var(--color-warning-dark);
+}
+
+.em-statut-consulte {
+  color: var(--color-success-dark);
+}
+
+.em-vide {
+  padding: 48px 20px;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+.em-vide p {
+  margin: 0;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.em-erreur {
+  margin-bottom: 16px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: var(--color-danger-light);
+  color: var(--color-danger-dark);
+  border: 1px solid color-mix(in srgb, var(--color-danger) 35%, transparent);
+  font-size: 0.85rem;
+}
+
+/* Agenda du jour */
+.em-agenda {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.em-agenda li {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.em-agenda li:hover {
+  background: var(--color-surface-alt);
+}
+
+.em-heure {
+  width: 48px;
+  flex-shrink: 0;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.em-agenda-texte {
+  flex: 1;
+  min-width: 0;
+}
+
+.em-statut-rdv {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--color-surface-alt);
+  color: var(--color-text-muted);
+}
+
+.em-statut-rdv.statut-planifie,
+.em-statut-rdv.statut-confirme,
+.em-statut-rdv.statut-reporte {
+  background: var(--color-warning-light);
+  color: var(--color-warning-dark);
+}
+
+.em-statut-rdv.statut-termine {
+  background: var(--color-success-light);
+  color: var(--color-success-dark);
+}
+
+.em-statut-rdv.statut-annule,
+.em-statut-rdv.statut-absent {
+  background: var(--color-danger-light);
+  color: var(--color-danger-dark);
+}
+
+/* Panneau latéral du dossier */
+.em-voile {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: flex-end;
+  background: rgba(var(--shadow-color), 0.35);
+}
+
+.em-panneau {
+  width: 100%;
+  max-width: 540px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  border-left: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+  animation: em-glisse 0.2s ease-out;
+}
+
+@keyframes em-glisse {
+  from {
+    transform: translateX(24px);
+    opacity: 0;
+  }
+}
+
+.em-panneau-entete {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.em-panneau-titre {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.em-panneau-titre h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.em-panneau-titre .em-identifiant {
+  padding: 1px 8px;
+  border-radius: 4px;
+  background: var(--color-surface-alt);
+}
+
+.em-meta {
+  margin: 4px 0 0;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.em-fermer {
+  align-self: flex-start;
+  display: inline-flex;
+  padding: 4px;
+  border: none;
+  background: none;
+  color: var(--color-text-muted);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.em-fermer:hover {
+  color: var(--color-text);
+}
+
+.em-panneau-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface-alt);
+}
+
+.em-panneau-corps {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.em-panneau-corps h3 {
+  margin: 0 0 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.em-formulaire {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.em-formulaire h3 {
+  margin-bottom: 0;
+}
+
+.em-formulaire label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.em-formulaire input,
+.em-formulaire textarea {
+  padding: 8px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: var(--color-text);
+  background: var(--color-surface);
+  resize: vertical;
+}
+
+.em-formulaire input:focus,
+.em-formulaire textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.em-formulaire-pied {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.em-historique {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.em-historique li {
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-alt);
+  font-size: 0.85rem;
+}
+
+.em-historique-entete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.em-historique p {
+  margin: 4px 0;
+  line-height: 1.5;
+  color: var(--color-text);
+}
+
+/* Notification */
+.em-toast {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 60;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: var(--color-brand);
+  color: var(--color-on-primary);
+  font-size: 0.82rem;
+  font-weight: 500;
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 640px) {
+  .em-agenda li {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .em-panneau-entete,
+  .em-panneau-actions,
+  .em-panneau-corps {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* Fonctions du chef de service */
+.em-entete-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.em-bouton-chef {
+  position: relative;
+  background: var(--color-surface);
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  text-decoration: none;
+}
+
+.em-bouton-chef:hover {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+
+.em-pastille {
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--color-danger);
+  color: #fff;
+  font-size: 0.7rem;
+  line-height: 18px;
+  text-align: center;
+}

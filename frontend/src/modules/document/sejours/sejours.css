@@ -1,0 +1,66 @@
+/* Séjours hospitaliers. Couleurs : variables du thème. */
+
+.sejour-formulaire {
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  background: var(--color-surface-alt);
+}
+
+.sejours-liste {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sejours-liste li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: var(--color-surface);
+}
+
+.sejours-liste li.en-cours {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+.sejour-icone {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface);
+  color: var(--color-primary);
+  border: 1px solid var(--color-border);
+}
+
+.sejour-texte {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sejour-texte strong {
+  color: var(--color-brand);
+}
+
+.sejour-texte small {
+  color: var(--color-text-muted);
+}
+
+.sejour-actions {
+  display: flex;
+  gap: 8px;
+}

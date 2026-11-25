@@ -1,0 +1,207 @@
+/* Cloche de notifications (barre de navigation). Couleurs : variables du thème. */
+
+.cloche {
+  position: relative;
+}
+
+.cloche-bouton {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-on-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.cloche-bouton:hover,
+.cloche-bouton[aria-expanded='true'] {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.cloche-bouton:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.cloche-badge {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--color-danger);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+  border: 2px solid var(--color-brand);
+}
+
+.cloche-panneau {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: min(380px, calc(100vw - 32px));
+  max-height: min(520px, calc(100vh - 90px));
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(var(--shadow-color), 0.18);
+  overflow: hidden;
+  z-index: 40;
+}
+
+.cloche-entete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-brand);
+}
+
+.cloche-tout-lire {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: none;
+  color: var(--color-primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 6px;
+}
+
+.cloche-tout-lire:hover {
+  background: var(--color-primary-light);
+}
+
+.cloche-liste {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+}
+
+.cloche-item {
+  --cloche-teinte: var(--color-primary);
+  --cloche-fond-icone: var(--color-primary-light);
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 16px;
+  border: none;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+}
+
+.cloche-item:hover {
+  background: var(--color-surface-alt);
+}
+
+.cloche-item.non-lue {
+  background: color-mix(in srgb, var(--color-primary-light) 55%, var(--color-surface));
+}
+
+.cloche-item.priorite-important {
+  --cloche-teinte: var(--color-warning-dark);
+  --cloche-fond-icone: var(--color-warning-light);
+}
+
+.cloche-item.priorite-critique {
+  --cloche-teinte: var(--color-danger);
+  --cloche-fond-icone: var(--color-danger-light);
+}
+
+.cloche-item-icone {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cloche-teinte);
+  background: var(--cloche-fond-icone);
+}
+
+.cloche-item-texte {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cloche-item-titre {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-brand);
+}
+
+.cloche-item-message {
+  font-size: 0.82rem;
+  color: var(--color-text);
+  overflow-wrap: anywhere;
+}
+
+.cloche-item-date {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+}
+
+.cloche-item-point {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  margin-top: 6px;
+  border-radius: 999px;
+  background: var(--cloche-teinte);
+}
+
+.cloche-etat {
+  margin: 0;
+  padding: 20px 16px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.cloche-etat.erreur {
+  color: var(--color-danger);
+}
+
+.cloche-suite {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-primary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.cloche-suite:hover {
+  background: var(--color-surface-alt);
+}

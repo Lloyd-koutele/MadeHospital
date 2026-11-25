@@ -1,0 +1,254 @@
+/* Galerie des modèles. Couleurs : variables du thème. */
+
+.galerie {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.galerie-recherche {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 8px;
+  padding: 0 10px;
+  color: var(--color-text-muted);
+}
+
+.galerie-recherche input {
+  flex: 1;
+  border: none;
+  padding: 9px 0;
+  font-size: 0.92rem;
+  background: transparent;
+  color: var(--color-text);
+}
+
+.galerie-recherche input:focus {
+  outline: none;
+}
+
+.galerie-groupe h3 {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--color-text-muted);
+  margin: 6px 0 8px;
+}
+
+.galerie-grille {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 8px;
+}
+
+.galerie-carte {
+  position: relative;
+  display: flex;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-surface);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.galerie-carte:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.galerie-choisir {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 36px 10px 12px;
+  border: none;
+  background: none;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+}
+
+.galerie-choisir:disabled {
+  cursor: wait;
+}
+
+.galerie-icone {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.galerie-texte strong {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--color-brand);
+}
+
+.galerie-texte small {
+  color: var(--color-text-muted);
+  font-size: 0.76rem;
+}
+
+.galerie-favori {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  border: none;
+  background: none;
+  color: var(--color-border-strong);
+  padding: 4px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.galerie-favori.actif {
+  color: var(--color-warning);
+}
+
+.galerie-favori.actif svg {
+  fill: currentColor;
+}
+
+.galerie-favori:hover {
+  color: var(--color-warning);
+}
+
+.galerie-pied {
+  border-top: 1px solid var(--color-border);
+  padding-top: 10px;
+}
+
+.galerie-info {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.galerie-erreur {
+  background: var(--color-danger-light);
+  color: var(--color-danger-dark);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.galerie-succes {
+  display: block;
+  color: var(--color-success-dark);
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+}
+
+.galerie-lien {
+  border: none;
+  background: none;
+  color: var(--color-primary);
+  font-weight: 600;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.galerie-demande {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.galerie-demande input,
+.galerie-demande textarea {
+  border: 1px solid var(--color-border-strong);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-family: inherit;
+}
+
+.galerie-demande > div {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  align-items: center;
+}
+
+.galerie-bouton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  border-radius: 8px;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  padding: 8px 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.galerie-bouton:disabled {
+  opacity: 0.55;
+}
+
+/* Liste des documents du dossier */
+.docs-liste {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.docs-liste li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding-right: 6px;
+  background: var(--color-surface);
+}
+
+.docs-liste li.examen {
+  background: var(--color-exam-bg);
+  border-color: var(--color-exam-border);
+}
+
+.docs-liste li:hover {
+  border-color: var(--color-primary);
+}
+
+.docs-ouvrir {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: none;
+  background: none;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+  min-width: 0;
+}
+
+.docs-texte {
+  flex: 1;
+  min-width: 0;
+}
+
+.docs-texte strong {
+  display: block;
+  color: var(--color-brand);
+  font-size: 0.92rem;
+}
+
+.docs-texte small {
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+}

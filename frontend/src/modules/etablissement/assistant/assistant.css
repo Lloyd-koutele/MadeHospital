@@ -1,0 +1,365 @@
+/* Assistant d'identité de l'hôpital. Couleurs : variables du thème. */
+
+.ident-page {
+  min-height: calc(100vh - 64px);
+  background: var(--color-background);
+  padding: 32px 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.ident-carte {
+  width: 100%;
+  max-width: 980px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  padding: 28px;
+}
+
+.ident-entete {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.ident-entete h1 {
+  font-size: 1.4rem;
+  color: var(--color-brand);
+  margin: 0 0 4px;
+}
+
+.ident-entete p {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.ident-icone {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+  flex-shrink: 0;
+}
+
+.ident-erreur {
+  background: var(--color-danger-light);
+  color: var(--color-danger-dark);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 16px;
+}
+
+.ident-grille {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 28px;
+}
+
+.ident-colonne {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.ident-champ {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ident-champ > span,
+.ident-sous-titre {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-brand);
+}
+
+.ident-champ input:not([type='file']) {
+  padding: 10px 12px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  background: var(--color-surface);
+}
+
+.ident-champ input:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+}
+
+.ident-formes {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ident-formes button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.ident-formes button.actif {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  font-weight: 600;
+}
+
+.ident-forme-icone {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+}
+
+.ident-forme-icone.forme-ronde {
+  border-radius: 50%;
+}
+
+.ident-forme-icone.forme-carree {
+  border-radius: 3px;
+}
+
+.ident-forme-icone.forme-rectangle {
+  width: 22px;
+  height: 14px;
+  border-radius: 3px;
+}
+
+.ident-fichier {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border: 1.5px dashed var(--color-border-strong);
+  border-radius: 10px;
+  color: var(--color-primary);
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--color-surface-alt);
+}
+
+.ident-fichier input {
+  display: none;
+}
+
+.ident-recadrage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.ident-cadre {
+  position: relative;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none;
+  background:
+    repeating-conic-gradient(var(--color-border) 0% 25%, var(--color-surface) 0% 50%) 50% / 16px 16px;
+  box-shadow: 0 0 0 3px var(--color-primary), var(--shadow-md);
+}
+
+.ident-cadre:active {
+  cursor: grabbing;
+}
+
+.ident-cadre.forme-ronde {
+  border-radius: 50%;
+}
+
+.ident-cadre.forme-carree {
+  border-radius: 12px;
+}
+
+.ident-cadre.forme-rectangle {
+  border-radius: 10px;
+}
+
+.ident-cadre img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-width: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.ident-zoom {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 300px;
+  color: var(--color-text-muted);
+}
+
+.ident-zoom input {
+  flex: 1;
+  accent-color: var(--color-primary);
+}
+
+.ident-info {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.ident-apercu-barre {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--color-brand);
+  color: var(--color-on-primary);
+}
+
+.ident-apercu-logo {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  background: var(--color-surface);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.ident-apercu-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.ident-apercu-logo.forme-ronde {
+  border-radius: 50%;
+}
+
+.ident-apercu-logo.forme-carree {
+  border-radius: 6px;
+}
+
+.ident-apercu-logo.forme-rectangle {
+  width: 51px;
+  border-radius: 6px;
+}
+
+.ident-apercu-logo.grand {
+  width: 52px;
+  height: 52px;
+  background: transparent;
+}
+
+.ident-apercu-logo.grand.forme-rectangle {
+  width: 78px;
+}
+
+.ident-apercu-document {
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 16px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.ident-apercu-doc-entete {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.ident-apercu-doc-entete strong {
+  display: block;
+  color: var(--color-brand);
+}
+
+.ident-apercu-doc-entete small {
+  color: var(--color-text-muted);
+}
+
+.ident-apercu-doc-titre {
+  margin: 12px 0 10px;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.ident-apercu-ligne {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--color-border);
+  margin: 8px 0;
+}
+
+.ident-apercu-ligne.courte {
+  width: 60%;
+}
+
+.ident-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--color-border);
+}
+
+.ident-bouton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ident-bouton:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+}
+
+.ident-bouton.secondaire {
+  background: var(--color-surface);
+  color: var(--color-primary);
+}
+
+.ident-bouton.secondaire:hover:not(:disabled) {
+  background: var(--color-primary-light);
+}
+
+.ident-bouton:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+@media (max-width: 820px) {
+  .ident-grille {
+    grid-template-columns: 1fr;
+  }
+
+  .ident-carte {
+    padding: 18px;
+  }
+}

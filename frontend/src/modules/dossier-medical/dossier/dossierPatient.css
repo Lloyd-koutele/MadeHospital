@@ -1,0 +1,609 @@
+/* Page du dossier médical (préfixe dm-). Couleurs : uniquement les variables du thème. */
+
+.dm-page {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 28px 16px 48px;
+}
+
+/* Fil d'Ariane et retour */
+.dm-haut {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.dm-fil {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.dm-fil a {
+  color: var(--color-text-muted);
+  text-decoration: none;
+}
+
+.dm-fil a:hover {
+  color: var(--color-text);
+}
+
+.dm-fil span {
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.dm-retour {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: none;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.dm-retour:hover {
+  color: var(--color-primary);
+}
+
+/* Boutons */
+.dm-bouton-principal,
+.dm-bouton-secondaire,
+.dm-bouton-discret,
+.dm-bouton-clair {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 8px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.dm-bouton-principal {
+  padding: 9px 16px;
+  border: none;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-size: 0.88rem;
+}
+
+.dm-bouton-principal:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+}
+
+.dm-bouton-principal:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.dm-bouton-secondaire {
+  padding: 8px 14px;
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.82rem;
+}
+
+.dm-bouton-secondaire:hover {
+  background: var(--color-surface-alt);
+}
+
+.dm-bouton-discret {
+  padding: 6px 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-alt);
+  color: var(--color-text);
+  font-size: 0.78rem;
+}
+
+.dm-bouton-discret svg {
+  color: var(--color-text-muted);
+}
+
+.dm-bouton-discret:hover {
+  border-color: var(--color-border-strong);
+}
+
+.dm-bouton-clair {
+  padding: 7px 12px;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 30%, transparent);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  font-size: 0.78rem;
+}
+
+.dm-bouton-clair:hover {
+  border-color: var(--color-primary);
+}
+
+/* Bandeau d'identité */
+.dm-bandeau {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 24px;
+  margin-bottom: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-surface);
+}
+
+.dm-identite {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.dm-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  border: 1px solid color-mix(in srgb, var(--color-primary) 25%, transparent);
+}
+
+.dm-titre {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.dm-titre h1 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  color: var(--color-text);
+}
+
+.dm-numero,
+.dm-badge-sang,
+.dm-badge-allergie {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  border-radius: 6px;
+  border: 1px solid;
+  font-size: 0.74rem;
+}
+
+.dm-numero {
+  font-weight: 500;
+  color: var(--color-text-muted);
+  background: var(--color-surface-alt);
+  border-color: var(--color-border);
+}
+
+.dm-badge-sang {
+  font-weight: 600;
+  color: var(--color-danger-dark);
+  background: var(--color-danger-light);
+  border-color: color-mix(in srgb, var(--color-danger) 30%, transparent);
+}
+
+.dm-badge-allergie {
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+  color: var(--color-warning-dark);
+  background: var(--color-warning-light);
+  border-color: color-mix(in srgb, var(--color-warning) 40%, transparent);
+}
+
+.dm-infos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin-top: 8px;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.dm-infos span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Onglets */
+.dm-onglets {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dm-onglets button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 0 12px;
+  margin-bottom: -1px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.dm-onglets button:hover {
+  color: var(--color-text);
+}
+
+.dm-onglets button.actif {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+  font-weight: 600;
+}
+
+.dm-compteur {
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: var(--color-surface-alt);
+  color: var(--color-text-muted);
+}
+
+/* Cartes */
+.dm-colonnes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  align-items: start;
+}
+
+.dm-carte {
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-surface);
+  overflow: hidden;
+}
+
+.dm-carte-entete {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dm-carte-entete h2 {
+  margin: 0;
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.dm-carte-entete p {
+  margin: 2px 0 0;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+/* Mesures (lecture) */
+.dm-mesures {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 20px;
+  margin: 0;
+  padding: 24px;
+}
+
+.dm-mesures > div {
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-alt);
+}
+
+.dm-mesures dt {
+  font-size: 0.74rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.dm-mesures dd {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.dm-mesures .dm-imc {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--color-primary-light);
+  border-color: color-mix(in srgb, var(--color-primary) 20%, transparent);
+}
+
+.dm-etiquette {
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid;
+  font-size: 0.74rem;
+  font-weight: 500;
+}
+
+.dm-imc-normal {
+  background: var(--color-success-light);
+  color: var(--color-success-dark);
+  border-color: color-mix(in srgb, var(--color-success) 30%, transparent);
+}
+
+.dm-imc-insuffisance,
+.dm-imc-surpoids {
+  background: var(--color-warning-light);
+  color: var(--color-warning-dark);
+  border-color: color-mix(in srgb, var(--color-warning) 40%, transparent);
+}
+
+.dm-imc-obesite {
+  background: var(--color-danger-light);
+  color: var(--color-danger-dark);
+  border-color: color-mix(in srgb, var(--color-danger) 30%, transparent);
+}
+
+/* Contexte (lecture) */
+.dm-contexte {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 24px;
+}
+
+.dm-contexte h3 {
+  margin: 0 0 6px;
+  font-size: 0.74rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.dm-boite {
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-alt);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--color-text);
+  white-space: pre-line;
+}
+
+.dm-boite-alerte {
+  font-weight: 500;
+  color: var(--color-warning-dark);
+  background: var(--color-warning-light);
+  border-color: color-mix(in srgb, var(--color-warning) 40%, transparent);
+}
+
+/* Formulaires (édition sur place et fenêtres) */
+.dm-formulaire {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px;
+}
+
+.dm-formulaire-fenetre {
+  padding: 0;
+}
+
+.dm-grille {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.dm-formulaire label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.dm-formulaire input,
+.dm-formulaire select,
+.dm-formulaire textarea {
+  padding: 0 12px;
+  height: 40px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 8px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.88rem;
+  font-weight: 400;
+}
+
+.dm-formulaire textarea {
+  height: auto;
+  padding: 10px 12px;
+  resize: vertical;
+}
+
+.dm-formulaire input:focus,
+.dm-formulaire select:focus,
+.dm-formulaire textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.15);
+}
+
+.dm-formulaire input::-webkit-inner-spin-button,
+.dm-formulaire input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.dm-formulaire-pied {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-border);
+}
+
+.dm-erreur {
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: var(--color-danger-light);
+  color: var(--color-danger-dark);
+  border: 1px solid color-mix(in srgb, var(--color-danger) 35%, transparent);
+  font-size: 0.85rem;
+}
+
+.dm-erreur-page {
+  margin-top: 16px;
+}
+
+.dm-vide {
+  padding: 40px 24px;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+}
+
+/* Consultations */
+.dm-consultations article {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: background-color 0.12s;
+}
+
+.dm-consultations article:last-child {
+  border-bottom: none;
+}
+
+.dm-consultations article:hover {
+  background: var(--color-surface-alt);
+}
+
+.dm-consultation-entete {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.dm-consultation-entete > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.dm-type {
+  padding: 2px 10px;
+  border-radius: 6px;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 25%, transparent);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  font-size: 0.74rem;
+  font-weight: 600;
+}
+
+.dm-date,
+.dm-praticien {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.dm-praticien strong {
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.dm-consultations p {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  white-space: pre-line;
+}
+
+.dm-lien {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-alt);
+  font-size: 0.74rem;
+  color: var(--color-text-muted);
+}
+
+.dm-lien svg {
+  color: var(--color-primary);
+}
+
+/* Notification */
+.dm-toast {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1300;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: var(--color-brand);
+  color: var(--color-on-primary);
+  font-size: 0.82rem;
+  font-weight: 500;
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 900px) {
+  .dm-colonnes {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .dm-mesures,
+  .dm-grille {
+    grid-template-columns: 1fr;
+  }
+
+  .dm-bandeau .dm-bouton-principal {
+    width: 100%;
+  }
+}

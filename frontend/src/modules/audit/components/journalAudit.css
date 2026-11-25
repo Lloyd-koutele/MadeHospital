@@ -1,0 +1,303 @@
+/* Journal d'audit (préfixe ja-). Couleurs : uniquement les variables du thème. */
+
+.ja {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Bandeau d'état de la chaîne */
+.ja-etat {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.ja-etat.integre {
+  background: var(--color-success-light);
+  border-color: color-mix(in srgb, var(--color-success) 35%, transparent);
+}
+
+.ja-etat.rompue {
+  background: var(--color-danger-light);
+  border-color: color-mix(in srgb, var(--color-danger) 45%, transparent);
+}
+
+.ja-etat-icone {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1.25rem;
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+}
+
+.ja-etat.integre .ja-etat-icone {
+  color: var(--color-success-dark);
+}
+
+.ja-etat.rompue .ja-etat-icone {
+  color: var(--color-danger-dark);
+}
+
+.ja-etat-texte {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.85rem;
+  color: var(--color-text);
+}
+
+.ja-etat.integre .ja-etat-texte strong {
+  color: var(--color-success-dark);
+}
+
+.ja-etat.rompue .ja-etat-texte strong {
+  color: var(--color-danger-dark);
+}
+
+/* Boutons */
+.ja-bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.82rem;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.ja-bouton:hover:not(:disabled) {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.ja-bouton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ja-bouton-principal {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.ja-bouton-principal:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+  color: var(--color-on-primary);
+}
+
+/* Carte : filtres + tableau */
+.ja-carte {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.ja-filtres {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+  align-items: end;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.ja-filtres label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.ja-filtres input,
+.ja-filtres select {
+  padding: 7px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
+.ja-filtres input:focus,
+.ja-filtres select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.ja-filtres-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.ja-erreur {
+  margin: 12px 20px 0;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: var(--color-danger-light);
+  color: var(--color-danger-dark);
+  font-size: 0.85rem;
+}
+
+.ja-vide {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+}
+
+/* Tableau */
+.ja-defilement {
+  overflow-x: auto;
+}
+
+.ja-tableau {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.84rem;
+}
+
+.ja-tableau th {
+  padding: 10px 16px;
+  text-align: left;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--color-text-muted);
+  background: var(--color-surface-alt);
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+}
+
+.ja-tableau td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text);
+  vertical-align: top;
+}
+
+.ja-ligne {
+  cursor: pointer;
+}
+
+.ja-ligne:hover,
+.ja-ligne.ouverte {
+  background: var(--color-surface-alt);
+}
+
+.ja-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.78rem;
+}
+
+.ja-discret {
+  font-size: 0.74rem;
+  color: var(--color-text-muted);
+}
+
+.ja-nowrap {
+  white-space: nowrap;
+}
+
+.ja-resultat {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 600;
+}
+
+.ja-resultat-succes {
+  background: var(--color-success-light);
+  color: var(--color-success-dark);
+}
+
+.ja-resultat-refus {
+  background: var(--color-danger-light);
+  color: var(--color-danger-dark);
+}
+
+.ja-resultat-echec {
+  background: var(--color-warning-light);
+  color: var(--color-warning-dark);
+}
+
+/* Détail technique d'une entrée */
+.ja-detail td {
+  background: var(--color-surface-alt);
+}
+
+.ja-detail dl {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 6px 16px;
+  margin: 4px 0;
+}
+
+.ja-detail dt {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.ja-detail dd {
+  margin: 0;
+  color: var(--color-text);
+}
+
+.ja-cassure {
+  word-break: break-all;
+}
+
+/* Pied */
+.ja-pied {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 20px;
+  background: var(--color-surface-alt);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.ja-pagination {
+  display: flex;
+  gap: 6px;
+}
+
+@media (max-width: 640px) {
+  .ja-detail dl {
+    grid-template-columns: 1fr;
+  }
+
+  .ja-etat {
+    flex-wrap: wrap;
+  }
+}

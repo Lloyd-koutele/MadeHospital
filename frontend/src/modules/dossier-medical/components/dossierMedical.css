@@ -1,0 +1,1369 @@
+/* Fichier CSS pour le dossier médical - Style statique sans animations */
+
+/* Classe pour du00e9sactiver toutes les animations et transitions */
+.no-animation,
+.no-animation * {
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+  animation-duration: 0s !important;
+  animation-delay: 0s !important;
+  transition-duration: 0s !important;
+  transition-delay: 0s !important;
+  transition-property: none !important;
+}
+
+/* Layout principal */
+.dossier-medical-page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-surface-alt);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.dossier-medical-header {
+  background-color: var(--color-text);
+  color: white;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(var(--shadow-color), 0.1);
+}
+
+.dossier-medical-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.dossier-medical-layout {
+  display: flex;
+  height: calc(100vh - 120px);
+  width: 100%;
+  overflow: hidden;
+  min-height: 600px;
+  background-color: var(--color-surface);
+  box-shadow: 0 0 10px rgba(var(--shadow-color), 0.1);
+  border-radius: 4px;
+  margin: 0 auto;
+}
+
+/* Sidebar et menu */
+.dossier-medical-sidebar {
+  width: 200px;
+  min-width: 180px;
+  max-width: 200px;
+  background-color: var(--color-surface-alt);
+  border-right: 1px solid var(--color-border);
+  overflow-y: auto;
+  padding: 1rem 0;
+  box-shadow: inset -5px 0 5px -5px rgba(var(--shadow-color),0.1);
+}
+
+.dossier-medical-menu-item {
+  padding: 0.8rem 1.2rem;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--color-text);
+  border-left: 3px solid transparent;
+}
+
+.dossier-medical-menu-item:hover {
+  background-color: var(--color-border);
+}
+
+.dossier-medical-menu-item.active {
+  background-color: var(--color-border);
+  border-left-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.dossier-medical-submenu {
+  padding-left: 1rem;
+  background-color: var(--color-surface-alt);
+}
+
+.dossier-medical-submenu-item {
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.dossier-medical-submenu-item:hover {
+  background-color: var(--color-border);
+}
+
+.dossier-medical-submenu-item.active {
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+/* Contenu principal */
+.dossier-medical-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  background-color: var(--color-surface);
+  min-width: calc(100% - 200px);
+  max-height: none;
+  border-left: 1px solid var(--color-border);
+  background-image: linear-gradient(var(--color-surface-alt) 1px, transparent 1px);
+  background-size: 100% 28px;
+  background-position: 0 -1px;
+}
+
+.dossier-medical-section-title {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: var(--color-text);
+  font-size: 1.3rem;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.5rem;
+}
+
+/* Formulaires */
+.dossier-medical-form {
+  max-width: 800px;
+}
+
+.dossier-medical-form .form-group {
+  margin-bottom: 1rem;
+}
+
+.dossier-medical-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.dossier-medical-form input,
+.dossier-medical-form select,
+.dossier-medical-form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 4px;
+  background-color: var(--color-surface);
+}
+
+.dossier-medical-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Boutons */
+.dossier-medical-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.dossier-medical-button-primary {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.dossier-medical-button-secondary {
+  background-color: var(--color-text-muted);
+  color: white;
+}
+
+.dossier-medical-button-success {
+  background-color: var(--color-success);
+  color: white;
+}
+
+.dossier-medical-button-danger {
+  background-color: var(--color-danger);
+  color: white;
+}
+
+/* Listes et tableaux */
+.dossier-medical-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dossier-medical-list-item {
+  padding: 0.8rem;
+  border-bottom: 1px solid var(--color-border);
+  cursor: pointer;
+}
+
+.dossier-medical-list-item:hover {
+  background-color: var(--color-surface-alt);
+}
+
+.dossier-medical-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.dossier-medical-table th,
+.dossier-medical-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dossier-medical-table th {
+  background-color: var(--color-surface-alt);
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.dossier-medical-table tr:hover {
+  background-color: var(--color-surface-alt);
+}
+
+/* Structure à deux niveaux pour toutes les sections médicales */
+.medical-item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.medical-item-preview {
+  display: flex;
+  padding: 1rem;
+  background-color: var(--color-surface-alt);
+  border-radius: 8px;
+  border-left: 4px solid var(--color-primary);
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+}
+
+.medical-item-preview:hover {
+  background-color: var(--color-border);
+}
+
+.medical-item-preview.active {
+  background-color: var(--color-primary-light);
+  border-left-color: var(--color-primary-dark);
+}
+
+.medical-item-number {
+  font-weight: bold;
+  margin-right: 1rem;
+  color: var(--color-primary);
+  min-width: 2rem;
+}
+
+.medical-item-summary {
+  flex: 1;
+}
+
+.medical-item-detail {
+  background-color: var(--color-surface);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  box-shadow: 0 2px 4px rgba(var(--shadow-color), 0.1);
+}
+
+.medical-item-form {
+  background-color: var(--color-surface);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  box-shadow: 0 2px 4px rgba(var(--shadow-color), 0.1);
+  border-left: 4px solid var(--color-primary);
+}
+
+.back-button {
+  background-color: var(--color-surface-alt);
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-text-muted);
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.add-button {
+  background-color: var(--color-primary);
+  border: none;
+  color: white;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+/* Informations générales */
+.patient-info-card {
+  background-color: var(--color-surface);
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(var(--shadow-color), 0.1);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.patient-info-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.patient-info-title {
+  font-size: 1.2rem;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.patient-info-section {
+  margin-bottom: 1rem;
+}
+
+.patient-info-label {
+  font-weight: 500;
+  color: var(--color-text-muted);
+  margin-bottom: 0.3rem;
+}
+
+.patient-info-value {
+  color: var(--color-text);
+}
+
+/* Imagerie médicale */
+.imagerie-medicale-container {
+  padding: 1rem;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 150px);
+}
+
+.imagerie-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Structure à deux niveaux pour l'imagerie médicale */
+.imagerie-list-view {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.imagerie-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: var(--color-surface-alt);
+  border-radius: 6px;
+  cursor: pointer;
+  border-left: 4px solid var(--color-primary);
+}
+
+.imagerie-item:hover {
+  background-color: var(--color-border);
+}
+
+.imagerie-item.active {
+  background-color: var(--color-primary-light);
+  border-left-color: var(--color-primary-dark);
+}
+
+.imagerie-item-number {
+  font-weight: bold;
+  margin-right: 1rem;
+  color: var(--color-primary);
+  min-width: 2rem;
+}
+
+.imagerie-item-thumbnail {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 1rem;
+}
+
+.imagerie-item-info {
+  flex: 1;
+}
+
+.imagerie-item-type {
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.imagerie-item-date {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.imagerie-detail-view {
+  background-color: var(--color-surface);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  box-shadow: 0 2px 4px rgba(var(--shadow-color), 0.1);
+}
+
+.imagerie-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.imagerie-detail-title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.imagerie-detail-image {
+  max-width: 100%;
+  max-height: 500px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(var(--shadow-color), 0.1);
+}
+
+/* Styles pour les images DICOM */
+.dicom-thumbnail-placeholder {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary);
+  border-radius: 4px;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border: 1px solid var(--color-primary-dark);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.dicom-thumbnail-placeholder:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 5px rgba(var(--shadow-color), 0.2);
+}
+
+.dicom-label {
+  background-color: var(--color-primary-dark);
+  padding: 2px 4px;
+  border-radius: 2px;
+  font-size: 0.6rem;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.dicom-view-hint {
+  font-size: 0.45rem;
+  opacity: 0.8;
+  text-align: center;
+  font-weight: normal;
+  line-height: 1;
+}
+
+.dicom-viewer-placeholder {
+  width: 100%;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-surface-alt);
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  margin-bottom: 1rem;
+  padding: 2rem;
+}
+
+.dicom-info {
+  text-align: center;
+  padding: 1.5rem;
+  max-width: 80%;
+}
+
+.dicom-icon {
+  display: inline-block;
+  background-color: var(--color-primary);
+  color: white;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+}
+
+.dicom-info code {
+  background-color: var(--color-border);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.85rem;
+  color: var(--color-danger);
+  word-break: break-all;
+}
+
+.imagerie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.image-card {
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: var(--color-surface);
+}
+
+.image-card-header {
+  padding: 0.5rem;
+  background-color: var(--color-surface-alt);
+  border-bottom: 1px solid var(--color-border);
+  font-weight: 500;
+}
+
+.image-card-body {
+  padding: 0.5rem;
+}
+
+.image-thumbnail {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.image-viewer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(var(--shadow-color), 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.image-viewer-content {
+  max-width: 90%;
+  max-height: 80%;
+}
+
+.image-viewer-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.image-viewer-button {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  cursor: pointer;
+}
+
+/* Antécédents */
+.antecedent-item {
+  border-left: 3px solid var(--color-primary);
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  background-color: var(--color-surface-alt);
+}
+
+.antecedent-type {
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+}
+
+.antecedent-date {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.antecedent-description {
+  color: var(--color-text);
+}
+
+/* Analyses */
+.analyse-item {
+  border-left: 3px solid var(--color-success);
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  background-color: var(--color-surface-alt);
+}
+
+.analyse-title {
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+}
+
+.analyse-date {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.analyse-result {
+  color: var(--color-text);
+}
+
+/* Ordonnances */
+.ordonnance-item {
+  border-left: 3px solid var(--color-warning);
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  background-color: var(--color-surface-alt);
+}
+
+.ordonnance-title {
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+}
+
+.ordonnance-date {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.ordonnance-content {
+  color: var(--color-text);
+}
+
+/* Utilitaires */
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.mt-1 {
+  margin-top: 0.5rem;
+}
+
+.mt-2 {
+  margin-top: 1rem;
+}
+
+.mb-1 {
+  margin-bottom: 0.5rem;
+}
+
+.mb-2 {
+  margin-bottom: 1rem;
+}
+
+.p-1 {
+  padding: 0.5rem;
+}
+
+.p-2 {
+  padding: 1rem;
+}
+
+/* Styles pour les contrôles d'images (DICOM et standard) */
+.dicom-open-button,
+.image-open-button {
+  margin-top: 10px;
+  transition: all 0.2s ease;
+}
+
+.dicom-open-button:hover,
+.image-open-button:hover {
+  background-color: var(--color-primary);
+  color: white;
+  transform: scale(1.05);
+}
+
+.dicom-viewer-card,
+.standard-image-viewer-card {
+  box-shadow: 0 4px 8px rgba(var(--shadow-color), 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.dicom-image,
+.standard-image {
+  transition: filter 0.3s ease;
+  max-width: 100%;
+  border-radius: 4px;
+}
+
+/* Les styles pour l'affichage des images dans le navigateur ont été déplacés vers NavigateurView.css */
+
+.control-value {
+  font-weight: bold;
+  color: var(--primary-color);
+  background-color: var(--color-border);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* Boutons de contrôle */
+.control-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.control-btn {
+  background-color: var(--bg-light);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(var(--shadow-color),0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+}
+
+.control-btn:hover {
+  background-color: var(--secondary-color);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(var(--shadow-color),0.15);
+}
+
+.control-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 2px rgba(var(--shadow-color),0.1);
+}
+
+/* Sliders */
+.slider-container {
+  width: 100%;
+  margin: 12px 0;
+  padding: 5px 0;
+}
+
+.viewer-range {
+  width: 100%;
+  height: 6px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--color-border);
+  outline: none;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 3px rgba(var(--shadow-color),0.1);
+}
+
+.viewer-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--secondary-color);
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(var(--shadow-color),0.2);
+}
+
+.viewer-range::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--secondary-color);
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(var(--shadow-color),0.2);
+}
+
+.viewer-range:focus {
+  outline: none;
+}
+
+.viewer-range::-webkit-slider-runnable-track {
+  border-radius: 5px;
+  height: 6px;
+}
+
+.viewer-range::-moz-range-track {
+  border-radius: 5px;
+  height: 6px;
+}
+
+/* Conteneur d'image */
+.image-wrapper {
+  max-height: 90vh;
+  max-width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.viewer-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: filter 0.3s ease;
+}
+
+/* Panneau d'information */
+.info-panel {
+  margin-bottom: 20px;
+}
+
+.info-panel h2 {
+  color: var(--text-color);
+  margin: 0 0 10px 0;
+  font-size: 1.4rem;
+}
+
+.info-details {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.info-details p {
+  margin: 5px 0;
+}
+
+/* Styles pour les ordonnances */
+.ordonnance-form {
+  background-color: var(--color-surface-alt);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(var(--shadow-color), 0.05);
+  margin-bottom: 1.5rem;
+}
+
+.ordonnance-form h3 {
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.5rem;
+}
+
+.ordonnance-form form {
+  display: grid;
+  gap: 1rem;
+}
+
+.ordonnance-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.ordonnance-form input,
+.ordonnance-form textarea,
+.ordonnance-form select {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid var(--color-border-strong);
+  background-color: var(--color-surface);
+  font-size: 0.9rem;
+}
+
+.ordonnance-form input:focus,
+.ordonnance-form textarea:focus,
+.ordonnance-form select:focus {
+  border-color: var(--color-primary);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb), 0.25);
+}
+
+.ordonnance-form button {
+  background-color: var(--color-success);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.ordonnance-form button:hover {
+  background-color: var(--color-success);
+}
+
+.ordonnance-form button:disabled {
+  background-color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+.ordonnance-list {
+  margin-bottom: 1.5rem;
+}
+
+.ordonnance-list ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.ordonnance-item {
+  flex: 0 0 calc(25% - 1.125rem);
+  padding: 1.25rem;
+  background-color: var(--color-surface);
+  border-radius: 4px;
+  border-left: 4px solid var(--color-primary);
+  box-shadow: 0 2px 8px rgba(var(--shadow-color), 0.08);
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  max-height: 200px;
+  overflow: hidden;
+  min-width: 200px;
+  border: 1px solid var(--color-border);
+  margin-bottom: 1.5rem;
+}
+
+.ordonnance-item.expanded {
+  flex: 0 0 500px;
+  max-height: none;
+  z-index: 10;
+  background-color: var(--color-surface);
+  box-shadow: 0 4px 12px rgba(var(--shadow-color), 0.15);
+}
+
+.ordonnance-preview {
+  margin-bottom: 0.5rem;
+}
+
+.ordonnance-details {
+  display: none;
+}
+
+.ordonnance-item.expanded .ordonnance-details {
+  display: block;
+}
+
+.ordonnance-meta {
+  margin-top: 0.5rem;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+.toggle-details {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  cursor: pointer;
+  padding: 0.25rem 0;
+  font-size: 0.9rem;
+  display: block;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.ordonnance-item div {
+  margin-bottom: 0.5rem;
+}
+
+.ordonnance-item strong {
+  color: var(--color-text);
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+.ordonnance-meta {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-surface-alt);
+}
+
+/* Styles pour les analyses */
+.analyse-form {
+  background-color: var(--color-surface-alt);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(var(--shadow-color), 0.05);
+  margin-bottom: 1.5rem;
+}
+
+.analyse-form h3 {
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.5rem;
+}
+
+.analyse-form form {
+  display: grid;
+  gap: 1rem;
+}
+
+.analyse-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.analyse-form input,
+.analyse-form textarea,
+.analyse-form select {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid var(--color-border-strong);
+  background-color: var(--color-surface);
+  font-size: 0.9rem;
+}
+
+.analyse-form input:focus,
+.analyse-form textarea:focus,
+.analyse-form select:focus {
+  border-color: var(--color-primary);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(var(--color-primary-rgb), 0.25);
+}
+
+.analyse-form button {
+  background-color: var(--color-success);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.analyse-form button:hover {
+  background-color: var(--color-success);
+}
+
+.analyse-form button:disabled {
+  background-color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+.analyse-list {
+  margin-bottom: 1.5rem;
+}
+
+.analyse-list ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.analyse-item {
+  flex: 0 0 calc(25% - 1.125rem);
+  padding: 1.25rem;
+  background-color: var(--color-surface);
+  border-radius: 4px;
+  border-left: 4px solid var(--color-primary);
+  box-shadow: 0 2px 8px rgba(var(--shadow-color), 0.08);
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  max-height: 200px;
+  overflow: hidden;
+  min-width: 200px;
+  border: 1px solid var(--color-border);
+  margin-bottom: 1.5rem;
+}
+
+.analyse-item.expanded {
+  flex: 0 0 500px;
+  max-height: none;
+  z-index: 10;
+  background-color: var(--color-surface);
+  box-shadow: 0 4px 12px rgba(var(--shadow-color), 0.15);
+}
+
+.analyse-preview {
+  margin-bottom: 0.5rem;
+}
+
+.analyse-details {
+  display: none;
+}
+
+.analyse-item.expanded .analyse-details {
+  display: block;
+}
+
+.analyse-meta {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-surface-alt);
+}
+
+/* Styles pour les titres de section */
+.section-title {
+  font-size: 1.4rem;
+  color: var(--color-text);
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  border-bottom: 2px solid var(--color-primary);
+  padding-bottom: 0.5rem;
+  display: inline-block;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-primary);
+  transform: scaleX(1);
+}
+
+/* Styles pour les modales */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(var(--shadow-color), 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1200;
+  padding: 1rem;
+}
+
+.modal-content {
+  background-color: var(--color-surface);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(var(--shadow-color), 0.15);
+  width: 90%;
+  max-width: 700px;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--color-text);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  padding: 0;
+  line-height: 1;
+}
+
+.modal-close:hover {
+  color: var(--color-text);
+}
+
+.modal-body {
+  padding: 1.5rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.modal-footer {
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-surface-alt);
+}
+
+.analyse-modal-details,
+.ordonnance-modal-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.detail-row {
+  display: flex;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.75rem;
+}
+
+.detail-label {
+  flex: 0 0 30%;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.detail-value {
+  flex: 1;
+  color: var(--color-text);
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 0.5rem 1.25rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-dark);
+}
+
+/* Styles pour l'affichage matriciel des images médicales */
+.imagerie-list-view {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  padding: 1rem 0;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.imagerie-item {
+  background-color: var(--color-surface);
+  border-radius: 4px;
+  border-left: 4px solid var(--color-primary);
+  box-shadow: 0 2px 8px rgba(var(--shadow-color), 0.08);
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: 1px solid var(--color-border);
+  width: 100%;
+  height: auto;
+}
+
+.imagerie-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(var(--shadow-color), 0.15);
+}
+
+.imagerie-item-thumbnail {
+  height: 100px;
+  width: 100%;
+  background-color: var(--color-surface-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  padding: 5px;
+  margin: 0 auto;
+}
+
+.imagerie-item-thumbnail img {
+  max-width: 80px;
+  max-height: 80px;
+  object-fit: contain;
+  width: auto;
+  height: auto;
+}
+
+.imagerie-item-info {
+  padding: 1rem;
+  flex: 1;
+}
+
+.imagerie-item-type {
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 0.25rem;
+}
+
+.imagerie-item-date {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.imagerie-item-description {
+  font-size: 0.9rem;
+  color: var(--color-text);
+  line-height: 1.4;
+}
+
+.dicom-thumbnail-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-primary-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+}
+
+.dicom-label {
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.dicom-view-hint {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+/* Styles pour les messages d'erreur */
+.error-message {
+  padding: 0.5rem;
+  background-color: var(--color-danger-light);
+  color: var(--color-danger);
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  border-left: 3px solid var(--color-danger);
+}
+
+/* Fin des styles pour le dossier médical */

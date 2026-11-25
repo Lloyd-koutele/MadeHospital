@@ -1,0 +1,114 @@
+/*
+ * Thème MadeHospital : SEUL endroit où les couleurs sont définies.
+ * Pour changer l'apparence de l'application, modifier les valeurs de :root ci-dessous.
+ * Les fichiers CSS utilisent var(--color-...), et les styles écrits dans les composants
+ * passent par l'objet `theme` de src/shared/theme/theme.ts, qui pointe vers ces mêmes variables.
+ */
+:root {
+  /* ===== Palette : les 6 couleurs à modifier pour changer tout le thème ===== */
+  --palette-principale: #0B2545;   /* bleu marine : barre de navigation, titres, bandeaux */
+  --palette-secondaire: #0077B6;   /* bleu médical : boutons, liens, éléments actifs */
+  --palette-accent: #48CAE4;       /* bleu clair : survols, mises en avant, focus */
+  --palette-fond: #F8FAFC;         /* arrière-plan des pages */
+  --palette-cartes: #FFFFFF;       /* cartes, tableaux, fenêtres */
+  --palette-texte: #263238;        /* texte courant */
+
+  /* ===== Couleurs dérivées (utilisées par les composants) ===== */
+  --color-brand: var(--palette-principale);
+  --color-primary: var(--palette-secondaire);
+  --color-primary-rgb: 0, 119, 182;
+  --color-primary-dark: color-mix(in srgb, var(--palette-secondaire) 75%, var(--palette-principale));
+  --color-primary-darker: var(--palette-principale);
+  --color-primary-soft: var(--palette-accent);
+  --color-primary-light: color-mix(in srgb, var(--palette-accent) 14%, var(--palette-cartes));
+  --color-accent: var(--palette-accent);
+  --color-on-primary: #ffffff;
+
+  /* Surfaces et texte */
+  --color-background: var(--palette-fond);
+  --color-surface: var(--palette-cartes);
+  --color-surface-alt: var(--palette-fond);
+  --color-text: var(--palette-texte);
+  --color-text-muted: color-mix(in srgb, var(--palette-texte) 62%, var(--palette-cartes));
+  --color-border: color-mix(in srgb, var(--palette-principale) 12%, var(--palette-cartes));
+  --color-border-strong: color-mix(in srgb, var(--palette-principale) 28%, var(--palette-cartes));
+
+  /* Bulletins et résultats d'examens : vert pâle */
+  --color-exam-bg: #eef8f1;
+  --color-exam-border: #bfe3cb;
+  --color-exam-accent: #2e8b57;
+
+  /* États */
+  --color-success: #1e8e5a;
+  --color-success-dark: #146c43;
+  --color-success-light: #e9f7ef;
+  --color-danger: #d64545;
+  --color-danger-dark: #a82f2f;
+  --color-danger-light: #fdecec;
+  --color-warning: #e5a100;
+  --color-warning-dark: #8a5a00;
+  --color-warning-light: #fff6e0;
+
+  /* Ombres et rayons */
+  --shadow-color: 11, 37, 69;
+  --shadow-sm: 0 1px 3px rgba(var(--shadow-color), 0.08);
+  --shadow-md: 0 4px 14px rgba(var(--shadow-color), 0.10);
+  --radius: 10px;
+
+  /* Bootstrap suit le thème (valeur RGB de --palette-secondaire, à ajuster avec elle) */
+  --bs-primary: var(--color-primary);
+  --bs-primary-rgb: var(--color-primary-rgb);
+  --bs-link-color: var(--color-primary);
+  --bs-link-color-rgb: var(--color-primary-rgb);
+  --bs-link-hover-color: var(--color-primary-dark);
+  --bs-body-color: var(--color-text);
+  --bs-body-bg: var(--color-background);
+  --bs-border-color: var(--color-border);
+  --bs-success: var(--color-success);
+  --bs-danger: var(--color-danger);
+  --bs-warning: var(--color-warning);
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--color-primary);
+  --bs-btn-border-color: var(--color-primary);
+  --bs-btn-hover-bg: var(--color-primary-dark);
+  --bs-btn-hover-border-color: var(--color-primary-dark);
+  --bs-btn-active-bg: var(--color-primary-darker);
+  --bs-btn-active-border-color: var(--color-primary-darker);
+  --bs-btn-disabled-bg: var(--color-primary);
+  --bs-btn-disabled-border-color: var(--color-primary);
+}
+
+.btn-outline-primary {
+  --bs-btn-color: var(--color-primary);
+  --bs-btn-border-color: var(--color-primary);
+  --bs-btn-hover-bg: var(--color-primary);
+  --bs-btn-hover-border-color: var(--color-primary);
+  --bs-btn-active-bg: var(--color-primary-dark);
+  --bs-btn-active-border-color: var(--color-primary-dark);
+}
+
+.nav-tabs .nav-link.active,
+.nav-pills .nav-link.active {
+  color: var(--color-primary);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--color-primary-soft);
+  box-shadow: 0 0 0 0.2rem rgba(var(--color-primary-rgb), 0.2);
+}
+
+/* Bulletin d'examen (résultats d'analyses) : à appliquer aux cartes de résultats */
+.bulletin-examen {
+  background-color: var(--color-exam-bg);
+  border: 1px solid var(--color-exam-border);
+  border-left: 4px solid var(--color-exam-accent);
+  border-radius: var(--radius);
+}

@@ -1,0 +1,336 @@
+/* Formulaire « Nouveau dossier patient » (préfixe fp-). Couleurs : uniquement les variables du thème. */
+
+.fp {
+  display: flex;
+  flex-direction: column;
+  margin: -1.25rem; /* occupe toute la largeur de la fenêtre */
+}
+
+.fp-corps {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 24px;
+}
+
+.fp-erreur {
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: var(--color-danger-light);
+  color: var(--color-danger-dark);
+  border: 1px solid color-mix(in srgb, var(--color-danger) 40%, transparent);
+  font-size: 0.88rem;
+}
+
+/* Blocs */
+.fp-bloc {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.fp-bloc + .fp-bloc {
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+}
+
+.fp-bloc-titre {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--color-text-muted);
+}
+
+.fp-note {
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.fp-grille {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.fp-grille-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* Champs */
+.fp-champ {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 0;
+}
+
+.fp-libelle {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.fp-requis {
+  color: var(--color-danger);
+}
+
+.fp-champ input,
+.fp-champ select,
+.fp-champ textarea {
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 8px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.9rem;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.fp-champ textarea {
+  height: auto;
+  padding: 8px 12px;
+  resize: vertical;
+}
+
+.fp-champ input:focus,
+.fp-champ select:focus,
+.fp-champ textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.15);
+}
+
+.fp input::-webkit-inner-spin-button,
+.fp input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.fp input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.fp input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 40px var(--color-surface) inset;
+  -webkit-text-fill-color: var(--color-text);
+}
+
+/* Pastilles (âge, IMC) */
+.fp-pastille {
+  margin-left: auto;
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.fp-imc-normal {
+  background: var(--color-success-light);
+  color: var(--color-success-dark);
+}
+
+.fp-imc-insuffisance,
+.fp-imc-surpoids {
+  background: var(--color-warning-light);
+  color: var(--color-warning-dark);
+}
+
+.fp-imc-obesite {
+  background: var(--color-danger-light);
+  color: var(--color-danger-dark);
+}
+
+/* Sexe : contrôle segmenté */
+.fp-segments {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  height: 40px;
+  padding: 4px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-surface-alt);
+}
+
+.fp-segments button {
+  border: none;
+  border-radius: 6px;
+  background: none;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.fp-segments button.choisi {
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Téléphone avec indicatif */
+.fp-telephone {
+  display: flex;
+  height: 40px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+.fp-telephone:focus-within {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.15);
+}
+
+.fp-indicatif {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 12px;
+  background: var(--color-surface-alt);
+  border-right: 1px solid var(--color-border);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.fp .fp-telephone input {
+  height: 100%;
+  border: none;
+  border-radius: 0;
+}
+
+.fp .fp-telephone input:focus {
+  box-shadow: none;
+}
+
+/* Unités (cm, kg) */
+.fp-unite {
+  position: relative;
+  display: block;
+}
+
+.fp-unite input {
+  padding-right: 40px;
+}
+
+.fp-unite span {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+/* Mot de passe */
+.fp-mdp {
+  position: relative;
+  display: block;
+}
+
+.fp-mdp input {
+  padding-right: 42px;
+}
+
+.fp-mdp button {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  padding: 4px;
+  border: none;
+  border-radius: 4px;
+  background: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.fp-mdp button:hover {
+  color: var(--color-text);
+}
+
+.fp-aide {
+  margin: 0;
+  font-size: 0.74rem;
+  color: var(--color-text-muted);
+}
+
+/* Pied fixe */
+.fp-pied {
+  position: sticky;
+  bottom: -1.25rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 12px 24px;
+  background: var(--color-background);
+  border-top: 1px solid var(--color-border);
+}
+
+.fp-bouton-secondaire,
+.fp-bouton-principal {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.fp-bouton-secondaire {
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.fp-bouton-secondaire:hover {
+  background: var(--color-surface-alt);
+}
+
+.fp-bouton-principal {
+  border: none;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.fp-bouton-principal:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+}
+
+.fp-bouton-principal:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+@media (max-width: 640px) {
+  .fp-grille,
+  .fp-grille-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .fp-corps {
+    padding: 16px;
+  }
+}

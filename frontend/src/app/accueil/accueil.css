@@ -1,0 +1,230 @@
+/* Page d'accueil publique. Couleurs : uniquement les variables du thème (src/shared/theme/theme.css). */
+
+.accueil {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-background);
+  color: var(--color-text);
+}
+
+.accueil-conteneur {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Barre supérieure */
+.accueil-barre {
+  background: var(--color-brand);
+  color: var(--color-on-primary);
+}
+
+.accueil-barre-contenu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 64px;
+}
+
+.accueil-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.accueil-logo svg {
+  color: var(--color-accent);
+}
+
+/* Bandeau principal */
+.accueil-hero {
+  background:
+    linear-gradient(135deg, var(--color-brand) 0%, var(--color-primary) 100%);
+  color: var(--color-on-primary);
+  padding: 72px 0 80px;
+}
+
+.accueil-surtitre {
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  margin-bottom: 0.75rem;
+}
+
+.accueil-hero h1 {
+  font-size: clamp(1.8rem, 4vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.2;
+  max-width: 760px;
+  margin-bottom: 1.25rem;
+}
+
+.accueil-intro {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 680px;
+  opacity: 0.92;
+  margin-bottom: 2rem;
+}
+
+.accueil-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Boutons */
+.accueil-bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  text-decoration: none;
+  border: 2px solid transparent;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.accueil-bouton-principal {
+  background: var(--color-surface);
+  color: var(--color-brand);
+}
+
+.accueil-bouton-principal:hover {
+  background: var(--color-accent);
+  color: var(--color-brand);
+}
+
+.accueil-bouton-contour {
+  border-color: rgba(255, 255, 255, 0.6);
+  color: var(--color-on-primary);
+}
+
+.accueil-bouton-contour:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.accueil-bouton-clair {
+  padding: 0.45rem 1rem;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.accueil-bouton-clair:hover {
+  background: var(--color-accent);
+  color: var(--color-brand);
+}
+
+/* Sections */
+.accueil-section {
+  padding: 64px 0;
+}
+
+.accueil-section-alt {
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.accueil-section h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-brand);
+  margin-bottom: 2rem;
+}
+
+.accueil-grille {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.accueil-grille-4 {
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.accueil-carte {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.accueil-carte:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* Carte "Résultats d'examens" : vert pâle des bulletins */
+.accueil-carte.bulletin-examen {
+  background: var(--color-exam-bg);
+  border-color: var(--color-exam-border);
+}
+
+.accueil-carte-profil {
+  background: var(--color-background);
+}
+
+.accueil-carte h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-brand);
+  margin: 14px 0 8px;
+}
+
+.accueil-carte p {
+  color: var(--color-text-muted);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.accueil-icone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  font-size: 1.3rem;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.accueil-icone-examen {
+  background: var(--color-surface);
+  color: var(--color-exam-accent);
+}
+
+/* Pied de page */
+.accueil-pied {
+  margin-top: auto;
+  background: var(--color-brand);
+  color: rgba(255, 255, 255, 0.75);
+  padding: 20px 0;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 576px) {
+  .accueil-hero {
+    padding: 48px 0 56px;
+  }
+
+  .accueil-section {
+    padding: 44px 0;
+  }
+
+  .accueil-actions .accueil-bouton {
+    width: 100%;
+  }
+}

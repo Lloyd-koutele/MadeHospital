@@ -1,0 +1,60 @@
+# GABARIT : le fichier réellement lu par Traefik (dynamic.yml) est généré au démarrage par
+# docker-entrypoint.sh, qui remplace ${APP_DOMAIN} par la valeur définie dans .env.
+#
+# Routage par chemin sur un seul domaine HTTPS :
+#   /api, /swagger-ui, /v3/api-docs  -> backend (Spring Boot)
+#   tout le reste                    -> frontend (Nginx + React)
+# et un sous-domaine pour l'interface d'administration d'Orthanc :
+#   orthanc.${APP_DOMAIN}            -> Orthanc (protégé par ses propres identifiants)
+http:
+  routers:
+    api:
+      rule: "Host(`${APP_DOMAIN}`) && (PathPrefix(`/api`) || PathPrefix(`/swagger-ui`) || PathPrefix(`/v3/api-docs`))"
+      priority: 10
+      entryPoints: [websecure]
+      middlewares: [securite]
+      tls: {}
+      service: backend
+
+    frontend:
+      rule: "Host(`${APP_DOMAIN}`)"
+      priority: 1
+      entryPoints: [websecure]
+      middlewares: [securite]
+      tls: {}
+      service: frontend
+
+    orthanc:
+      rule: "Host(`orthanc.${APP_DOMAIN}`)"
+      entryPoints: [websecure]
+      middlewares: [securite]
+      tls: {}
+      service: orthanc
+
+  middlewares:
+    securite:
+      headers:
+        stsSeconds: 31536000
+        contentTypeNosniff: true
+        frameDeny: true
+        referrerPolicy: "strict-origin-when-cross-origin"
+
+  services:
+    backend:
+      loadBalancer:
+        servers:
+          - url: "http://backend:8080"
+    frontend:
+      loadBalancer:
+        servers:
+          - url: "http://frontend:80"
+    orthanc:
+      loadBalancer:
+        servers:
+          - url: "http://orthanc:8042"
+
+# Certificat local (mkcert) choisi automatiquement par SNI. Générer avec scripts/generer-certificats.sh.
+tls:
+  certificates:
+    - certFile: /etc/traefik/certs/${APP_DOMAIN}.pem
+      keyFile: /etc/traefik/certs/${APP_DOMAIN}-key.pem

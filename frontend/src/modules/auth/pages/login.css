@@ -1,0 +1,274 @@
+/* Page de connexion. Couleurs : uniquement les variables du thème (src/shared/theme/theme.css). */
+
+.connexion {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 88px 16px 48px;
+  overflow: hidden;
+  color: var(--color-on-primary);
+  background:
+    radial-gradient(ellipse at 50% 110%, color-mix(in srgb, var(--color-accent) 35%, transparent) 0%, transparent 55%),
+    linear-gradient(160deg, var(--color-brand) 0%, color-mix(in srgb, var(--color-brand) 55%, var(--color-primary)) 55%, var(--color-primary) 100%);
+}
+
+/* Décor : halos lumineux et tracé d'électrocardiogramme */
+.connexion-decor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.connexion-halo {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.55;
+}
+
+.connexion-halo-1 {
+  width: 420px;
+  height: 420px;
+  top: -120px;
+  right: -80px;
+  background: var(--color-accent);
+  opacity: 0.35;
+}
+
+.connexion-halo-2 {
+  width: 360px;
+  height: 360px;
+  bottom: -140px;
+  left: -100px;
+  background: var(--color-primary);
+}
+
+.connexion-ecg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 14%;
+  width: 100%;
+  height: 120px;
+  opacity: 0.35;
+}
+
+.connexion-ecg path {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  animation: connexion-trace 4s ease-out forwards;
+}
+
+@keyframes connexion-trace {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Retour à l'accueil */
+.connexion-retour {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  color: var(--color-on-primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.connexion-retour:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: var(--color-accent);
+  color: var(--color-on-primary);
+}
+
+/* Carte translucide */
+.connexion-carte {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  padding: 40px 36px 32px;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 20px 50px rgba(var(--shadow-color), 0.45);
+  animation: connexion-apparition 0.5s ease-out;
+}
+
+@keyframes connexion-apparition {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.connexion-marque {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: var(--color-accent);
+  margin-bottom: 10px;
+}
+
+.connexion-titre {
+  text-align: center;
+  font-size: 2.1rem;
+  font-weight: 800;
+  margin: 0 0 6px;
+}
+
+.connexion-sous-titre {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 0 26px;
+}
+
+.connexion-erreur {
+  margin-bottom: 18px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--color-danger) 28%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-danger) 60%, transparent);
+  font-size: 0.92rem;
+  text-align: center;
+}
+
+/* Champs en forme de pilule */
+.connexion-champ {
+  position: relative;
+  display: block;
+  margin-bottom: 18px;
+}
+
+.connexion-champ input {
+  width: 100%;
+  height: 54px;
+  padding: 0 54px 0 22px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--color-on-primary);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
+
+.connexion-champ input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.connexion-champ input:focus {
+  border-color: var(--color-accent);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-accent) 25%, transparent);
+}
+
+/* Remplissage automatique du navigateur : garder le texte lisible */
+.connexion-champ input:-webkit-autofill {
+  -webkit-text-fill-color: var(--color-on-primary);
+  -webkit-box-shadow: 0 0 0 40px var(--color-brand) inset;
+  caret-color: var(--color-on-primary);
+}
+
+.connexion-icone {
+  position: absolute;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.05rem;
+}
+
+.connexion-oeil {
+  background: none;
+  border: none;
+  padding: 4px;
+  right: 18px;
+  cursor: pointer;
+  display: inline-flex;
+}
+
+.connexion-oeil:hover,
+.connexion-oeil:focus-visible {
+  color: var(--color-accent);
+  outline: none;
+}
+
+/* Bouton principal */
+.connexion-bouton {
+  width: 100%;
+  height: 54px;
+  margin-top: 6px;
+  border: none;
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-brand);
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.connexion-bouton:hover:not(:disabled) {
+  background: var(--color-accent);
+}
+
+.connexion-bouton:active:not(:disabled) {
+  transform: scale(0.99);
+}
+
+.connexion-bouton:disabled {
+  opacity: 0.75;
+  cursor: wait;
+}
+
+.connexion-pied {
+  margin: 22px 0 0;
+  text-align: center;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+@media (max-width: 480px) {
+  .connexion-carte {
+    padding: 32px 22px 26px;
+  }
+
+  .connexion-titre {
+    font-size: 1.8rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .connexion-carte,
+  .connexion-ecg path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}

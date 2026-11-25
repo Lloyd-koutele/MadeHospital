@@ -1,0 +1,522 @@
+/* Tableau de bord patient (préfixe pt-) : grille 2/3 – 1/3, cartes sobres aux couleurs du thème. */
+
+.pt-page {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 28px 16px 40px;
+  color: var(--color-text);
+}
+
+.pt-info {
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+  margin: 0;
+}
+
+/* En-tête */
+.pt-entete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.pt-entete h1 {
+  font-size: 1.55rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.pt-entete p {
+  margin: 2px 0 0;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.pt-entete strong {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.pt-erreur {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  margin-bottom: 18px;
+  border-radius: var(--radius);
+  background: var(--color-danger-light);
+  color: var(--color-danger-dark);
+  font-size: 0.88rem;
+}
+
+.pt-erreur button {
+  border: 1px solid currentColor;
+  background: transparent;
+  color: inherit;
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+/* Boutons et liens */
+.pt-bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.pt-bouton:hover {
+  background: var(--color-primary-dark);
+  color: var(--color-on-primary);
+}
+
+.pt-bouton.petit {
+  padding: 8px 14px;
+  font-size: 0.8rem;
+}
+
+.pt-bouton.large {
+  width: 100%;
+  padding: 9px 14px;
+  font-size: 0.8rem;
+}
+
+.pt-bouton.contour {
+  margin-top: 14px;
+  padding: 8px 14px;
+  font-size: 0.8rem;
+  background: var(--color-surface);
+  color: var(--color-primary);
+  border-color: var(--color-primary-soft);
+}
+
+.pt-bouton.contour:hover {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+
+.pt-lien {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.pt-lien:hover {
+  text-decoration: underline;
+}
+
+/* Grille */
+.pt-grille {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.pt-colonne {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+
+/* Cartes */
+.pt-carte {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.pt-carte-entete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 22px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.pt-titre {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.pt-titre h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.pt-titre p {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.pt-icone {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.pt-icone.bleu {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.pt-icone.gris {
+  background: var(--color-surface-alt);
+  color: var(--color-text-muted);
+}
+
+.pt-icone.vert {
+  background: var(--color-success-light);
+  color: var(--color-success-dark);
+}
+
+.pt-carte-corps {
+  padding: 20px 22px;
+}
+
+.pt-carte-pied {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.pt-etiquette {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 3px 9px;
+  white-space: nowrap;
+}
+
+/* Tuiles de constantes */
+.pt-tuiles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.pt-tuiles.deux {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 12px;
+}
+
+.pt-tuile {
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  min-width: 0;
+}
+
+.pt-tuile span {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.pt-tuile strong {
+  display: block;
+  margin-top: 3px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pt-tuile strong.fort {
+  font-weight: 700;
+}
+
+.pt-tuile.imc {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: var(--color-primary-light);
+  border-color: var(--color-primary-soft);
+}
+
+.pt-tuile.imc strong {
+  font-size: 0.88rem;
+}
+
+/* Pastilles */
+.pt-pastille {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+
+.pt-pastille.normal {
+  background: var(--color-success-light);
+  color: var(--color-success-dark);
+  border-color: var(--color-success);
+}
+
+.pt-pastille.attention {
+  background: var(--color-warning-light);
+  color: var(--color-warning-dark);
+  border-color: var(--color-warning);
+}
+
+.pt-pastille.alerte {
+  background: var(--color-danger-light);
+  color: var(--color-danger-dark);
+  border-color: var(--color-danger);
+}
+
+.pt-pastille.neutre {
+  background: var(--color-surface-alt);
+  color: var(--color-text-muted);
+  border-color: var(--color-border);
+}
+
+/* État vide */
+.pt-vide {
+  padding: 24px 16px;
+  text-align: center;
+  border-radius: 12px;
+  background: var(--color-surface-alt);
+  border: 1px dashed var(--color-border-strong);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.pt-vide p {
+  margin: 4px auto 0;
+  max-width: 440px;
+}
+
+.pt-vide .pt-vide-titre {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.pt-vide-icone {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-primary);
+  font-size: 1.1rem;
+}
+
+/* Liste des rendez-vous et consultations */
+.pt-liste {
+  list-style: none;
+  margin: -6px 0;
+  padding: 0;
+}
+
+.pt-liste li {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.pt-liste li:last-child {
+  border-bottom: none;
+}
+
+.pt-liste-tete {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pt-liste strong {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.pt-liste small {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.pt-date {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 5px;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+  border: 1px solid var(--color-primary-soft);
+}
+
+.pt-date.passe {
+  color: var(--color-text-muted);
+  background: var(--color-surface-alt);
+  border-color: var(--color-border);
+}
+
+/* Colonne latérale : accès */
+.pt-texte {
+  margin: 0 0 14px;
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+}
+
+.pt-medecins {
+  list-style: none;
+  margin: 0 0 14px;
+  padding: 0 0 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.pt-medecins li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+}
+
+.pt-medecins li > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.pt-medecins strong,
+.pt-medecins small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pt-medecins strong {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.pt-medecins small {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+}
+
+.pt-avatar {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-brand);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.pt-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-primary);
+}
+
+.pt-note svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.pt-note p {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+}
+
+.pt-note strong {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+@media (max-width: 960px) {
+  .pt-grille {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .pt-tuiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pt-tuiles.deux {
+    grid-template-columns: 1fr;
+  }
+
+  .pt-carte-entete,
+  .pt-carte-corps {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}

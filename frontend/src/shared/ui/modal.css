@@ -1,0 +1,169 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(var(--shadow-color), 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1200;
+  padding: 1rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { 
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to { 
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-container {
+  background-color: var(--color-surface);
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(var(--shadow-color), 0.25);
+  width: 90%;
+  max-width: 550px;
+  max-height: 88vh; /* la hauteur suit le contenu, avec défilement au-delà */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: slideIn 0.3s ease-out;
+}
+
+.modal-header-nav {
+  display: flex;
+  align-items: center;
+  padding: 0.9rem 1.25rem;
+  background: var(--color-brand);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-title {
+  flex-grow: 1;
+  margin: 0;
+  color: var(--color-on-primary);
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.modal-content {
+  position: relative;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Style personnalisé pour la barre de défilement */
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: 4px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-strong);
+}
+
+.modal-close-button {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.75);
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  transition: all 0.2s;
+  margin-left: 0.5rem;
+}
+
+.modal-close-button:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: var(--color-on-primary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .modal-container {
+    width: 95%;
+    max-height: 80vh;
+  }
+  
+  .modal-header {
+    padding: 0.75rem 1rem;
+  }
+  
+  .modal-content {
+    padding: 1rem;
+  }
+}
+
+/* Protection contre les règles globales .modal-content d'autres pages (dossier médical) */
+.modal-container > .modal-content {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: var(--color-surface);
+}
+
+/* En-tête enrichi (icône + sous-titre) et fenêtre large */
+.modal-container.modal-large {
+  max-width: 720px;
+}
+
+.modal-header-nav {
+  gap: 14px;
+}
+
+.modal-titres {
+  flex: 1;
+  min-width: 0;
+}
+
+.modal-icone {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1.2rem;
+  color: var(--color-accent);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.modal-sous-titre {
+  margin: 2px 0 0;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.7);
+}
